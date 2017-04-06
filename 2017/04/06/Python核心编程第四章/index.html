@@ -87,7 +87,7 @@
 
 
 
-<meta name="description" content="#切片string[start:end:steps]  OR string[start:end]如：
+<meta name="description" content="切片string[start:end:steps]  OR string[start:end]如：
 &amp;gt;&amp;gt;&amp;gt; str
 &amp;apos;abcdefghijklmn&amp;apos;
 &amp;gt;&amp;gt;&amp;gt; str[0:3]
@@ -95,12 +95,12 @@
 &amp;gt;&amp;gt;&amp;gt; str[1:9:3]
 &amp;apos;beh&amp;apos;
 
-#”is” 和 “==”“is” 比较的是两个对象">
+“is” 和 “==”“is” 比较的是两个对象的i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python核心编程第四章">
 <meta property="og:url" content="http://Humbertzhang.github.io/2017/04/06/Python核心编程第四章/index.html">
 <meta property="og:site_name" content="Humbert's Blog">
-<meta property="og:description" content="#切片string[start:end:steps]  OR string[start:end]如：
+<meta property="og:description" content="切片string[start:end:steps]  OR string[start:end]如：
 &amp;gt;&amp;gt;&amp;gt; str
 &amp;apos;abcdefghijklmn&amp;apos;
 &amp;gt;&amp;gt;&amp;gt; str[0:3]
@@ -108,11 +108,11 @@
 &amp;gt;&amp;gt;&amp;gt; str[1:9:3]
 &amp;apos;beh&amp;apos;
 
-#”is” 和 “==”“is” 比较的是两个对象">
-<meta property="og:updated_time" content="2017-04-06T15:43:32.893Z">
+“is” 和 “==”“is” 比较的是两个对象的i">
+<meta property="og:updated_time" content="2017-04-06T15:45:47.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python核心编程第四章">
-<meta name="twitter:description" content="#切片string[start:end:steps]  OR string[start:end]如：
+<meta name="twitter:description" content="切片string[start:end:steps]  OR string[start:end]如：
 &amp;gt;&amp;gt;&amp;gt; str
 &amp;apos;abcdefghijklmn&amp;apos;
 &amp;gt;&amp;gt;&amp;gt; str[0:3]
@@ -120,7 +120,7 @@
 &amp;gt;&amp;gt;&amp;gt; str[1:9:3]
 &amp;apos;beh&amp;apos;
 
-#”is” 和 “==”“is” 比较的是两个对象">
+“is” 和 “==”“is” 比较的是两个对象的i">
 
 
 
@@ -336,7 +336,7 @@
 
       
         <hr>
-<p>#切片<br>string[start:end:steps]  OR string[start:end]<br>如：</p>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>string[start:end:steps]  OR string[start:end]<br>如：</p>
 <pre><code>&gt;&gt;&gt; str
 &apos;abcdefghijklmn&apos;
 &gt;&gt;&gt; str[0:3]
@@ -344,7 +344,7 @@
 &gt;&gt;&gt; str[1:9:3]
 &apos;beh&apos;
 </code></pre><hr>
-<p>#”is” 和 “==”<br>“is” 比较的是两个对象的id<br>“==” 比较的是两个对象的值<br>且在Python中[-256,256]范围内的<code>整数</code>，无论谁等于他们，id 都一样<br>因为在Python中令变量等于[-256,256]范围内的值只会用他们引用那些数<br>ps:对象的三个属性，id,type,value</p>
+<h3 id="“is”-和-“-”"><a href="#“is”-和-“-”" class="headerlink" title="“is” 和 “==”"></a>“is” 和 “==”</h3><p>“is” 比较的是两个对象的id<br>“==” 比较的是两个对象的值<br>且在Python中[-256,256]范围内的<code>整数</code>，无论谁等于他们，id 都一样<br>因为在Python中令变量等于[-256,256]范围内的值只会用他们引用那些数<br>ps:对象的三个属性，id,type,value</p>
 <pre><code>&gt;&gt;&gt; a = 256
 &gt;&gt;&gt; b = 256
 &gt;&gt;&gt; c = 256.0
@@ -364,7 +364,7 @@ False
 &gt;&gt;&gt; e is f
 False
 </code></pre><hr>
-<p>#可变类型与不可变类型<br>可变类型：列表 字典<br>不可变类型：数字 字符串 元组<br>这些不可变类型在改变他们的值时ID便会改变<br>而可变类型在改变时则不会</p>
+<h3 id="可变类型与不可变类型"><a href="#可变类型与不可变类型" class="headerlink" title="可变类型与不可变类型"></a>可变类型与不可变类型</h3><p>可变类型：列表 字典<br>不可变类型：数字 字符串 元组<br>这些不可变类型在改变他们的值时ID便会改变<br>而可变类型在改变时则不会</p>
 <hr>
 
       
@@ -451,8 +451,17 @@ False
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg"
@@ -496,6 +505,22 @@ False
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#切片"><span class="nav-number">1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“is”-和-“-”"><span class="nav-number">2.</span> <span class="nav-text">“is” 和 “==”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变类型与不可变类型"><span class="nav-number">3.</span> <span class="nav-text">可变类型与不可变类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
