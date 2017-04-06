@@ -1,0 +1,647 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="要做什么    
+1,向指定URL发送请求：   requests2,将状态码保存在redis数据库中 ： redis3,定时启动  ：   celerybeat4,返回给前端，以便生成图表：  flask5,注意有时需要附加头部信息：  HTTPAuthBasic6,一次性返回最近24小时数据  
+
+程序结构：    demo    ├── celerybeat.pid    ├── cele">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URL状态监控">
+<meta property="og:url" content="http://Humbertzhang.github.io/2017/03/25/URL状态监控/index.html">
+<meta property="og:site_name" content="Humbert's Blog">
+<meta property="og:description" content="要做什么    
+1,向指定URL发送请求：   requests2,将状态码保存在redis数据库中 ： redis3,定时启动  ：   celerybeat4,返回给前端，以便生成图表：  flask5,注意有时需要附加头部信息：  HTTPAuthBasic6,一次性返回最近24小时数据  
+
+程序结构：    demo    ├── celerybeat.pid    ├── cele">
+<meta property="og:image" content="https://s11.postimg.org/ozepc2ooz/image.png">
+<meta property="og:updated_time" content="2017-04-03T06:27:47.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL状态监控">
+<meta name="twitter:description" content="要做什么    
+1,向指定URL发送请求：   requests2,将状态码保存在redis数据库中 ： redis3,定时启动  ：   celerybeat4,返回给前端，以便生成图表：  flask5,注意有时需要附加头部信息：  HTTPAuthBasic6,一次性返回最近24小时数据  
+
+程序结构：    demo    ├── celerybeat.pid    ├── cele">
+<meta name="twitter:image" content="https://s11.postimg.org/ozepc2ooz/image.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Humbertzhang.github.io/2017/03/25/URL状态监控/"/>
+
+
+
+
+
+  <title> URL状态监控 | Humbert's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Humbert's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欲变世界，先变自身</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/03/25/URL状态监控/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Humbert Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Humbert's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                URL状态监控
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T12:53:00+08:00">
+                2017-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<pre><code>要做什么    
+</code></pre><p>1,向指定URL发送请求：   requests<br>2,将状态码保存在redis数据库中 ： redis<br>3,定时启动  ：   celerybeat<br>4,返回给前端，以便生成图表：  flask<br>5,注意有时需要附加头部信息：  HTTPAuthBasic<br>6,一次性返回最近24小时数据  </p>
+<hr>
+<p>程序结构：<br>    demo<br>    ├── celerybeat.pid<br>    ├── celerybeat-schedule<br>    ├── demo2.py<br>    ├── make_celery.py<br>    └── monitor.py</p>
+<hr>
+<blockquote>
+<p>make_celery.py   #用于帮助配置 monitor 中的 celery</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</div><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</div><div class="line"><span class="keyword">import</span> redis</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_celery</span><span class="params">(app)</span>:</span></div><div class="line">    celery = Celery(app.import_name,broker=app.config[<span class="string">'CELERY_BROKER_URL'</span>])</div><div class="line">    celery.conf.update(app.config)</div><div class="line">    TaskBase = celery.Task</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ContextTask</span><span class="params">(TaskBase)</span>:</span></div><div class="line">        abstract = <span class="keyword">True</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self,*args,**kwargs)</span>:</span></div><div class="line">            <span class="keyword">with</span> app.app_context():</div><div class="line">                <span class="keyword">return</span> TaskBase.__call__(self,*args,**kwargs)</div><div class="line">    celery.Task = ContextTask</div><div class="line">    <span class="keyword">return</span> celery</div></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>monitor.py #监控程序<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> redis</div><div class="line"><span class="keyword">from</span> requests.auth <span class="keyword">import</span> HTTPBasicAuth</div><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</div><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,jsonify</div><div class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</div><div class="line"><span class="keyword">from</span> os <span class="keyword">import</span> sys,path</div><div class="line"><span class="keyword">from</span> make_celery <span class="keyword">import</span> make_celery</div><div class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager </div><div class="line"></div><div class="line"><span class="comment">#每次检查间隔时间</span></div><div class="line">TIME_EVERY_CHECK=<span class="number">10</span></div><div class="line"></div><div class="line"><span class="comment">#连接redis</span></div><div class="line">pool = redis.ConnectionPool(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">6379</span>, db=<span class="number">1</span>)</div><div class="line">r = redis.StrictRedis(connection_pool=pool)</div><div class="line"></div><div class="line"><span class="comment">#图书馆头部信息</span></div><div class="line">Passlib =<span class="string">"2016000000:123456"</span></div><div class="line">b64Vallib = base64.b64encode(Passlib)</div><div class="line"></div><div class="line"><span class="comment">#初始化APP</span></div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line">url01=<span class="string">"https://taobao.com"</span></div><div class="line">url02=<span class="string">"https://ccnubox.muxixyz.com/api/lib/login/"</span></div><div class="line"></div><div class="line"><span class="comment">#配置</span></div><div class="line">app.config.update(</div><div class="line">    </div><div class="line">    CELERY_BROKER_URL=<span class="string">'redis://127.0.0.1:6379'</span>,</div><div class="line">    CELERY_RESULT_BACKEND=<span class="string">'redis://127.0.0.1:6379/0'</span>,    </div><div class="line">    <span class="comment">#Timezone</span></div><div class="line">    CELERY_TIMEZONE = <span class="string">'Asia/Shanghai'</span>,</div><div class="line"></div><div class="line">    <span class="comment">#schedules</span></div><div class="line"></div><div class="line">    CELERYBEAT_SCHEDULE = &#123;</div><div class="line">        <span class="string">'request_taobao'</span>:&#123;</div><div class="line">            <span class="string">'task'</span>: <span class="string">'login_xinximenhu'</span>,</div><div class="line">            <span class="string">'schedule'</span>: timedelta(seconds = TIME_EVERY_CHECK),</div><div class="line">        &#125;,</div><div class="line">        <span class="string">'login_library'</span>:&#123;</div><div class="line">            <span class="string">'task'</span>:<span class="string">'login_lib'</span>,</div><div class="line">            <span class="string">'schedule'</span>:timedelta(seconds = TIME_EVERY_CHECK),</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line"></div><div class="line">    celery = make_celery(app)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#访问淘宝</span></div><div class="line"><span class="meta">@celery.task(name='request_taobao')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_taobao</span><span class="params">()</span>:</span></div><div class="line">    resp01 = requests.get(url01)</div><div class="line">    statu01 = resp01.status_code</div><div class="line">    r.set(url01,statu01)</div><div class="line"></div><div class="line"><span class="comment">#登录CCNU图书馆 </span></div><div class="line"><span class="meta">@celery.task(name='login_lib')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_lib</span><span class="params">()</span>:</span></div><div class="line">    resp02= requests.get(url02,headers = &#123;<span class="string">"Authorization"</span>: <span class="string">"Basic %s"</span> %b64Vallib&#125;)</div><div class="line">    statu02 = resp02.status_code</div><div class="line">    r.set(url02,statu02)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@app.route("/")</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> jsonify(&#123;</div><div class="line">            url01:r.get(url01),</div><div class="line">            url02:r.get(url02)</div><div class="line">           &#125;)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ ==<span class="string">'__main__'</span>:</div><div class="line">    app.run(debug=<span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+<p>demo2.py       #一次返回最近XXX时间内的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">#coding:utf-8   </div><div class="line"></div><div class="line">from __future__ import absolute_import</div><div class="line">import requests</div><div class="line">import base64</div><div class="line">import redis</div><div class="line">from requests.auth import HTTPBasicAuth</div><div class="line">from celery import Celery</div><div class="line">from flask import Flask,jsonify</div><div class="line">from celery.schedules import crontab</div><div class="line">from datetime import timedelta</div><div class="line">from os import sys,path</div><div class="line">from make_celery import make_celery</div><div class="line">from flask_script import Manager </div><div class="line"></div><div class="line">#每次检查间隔时间</div><div class="line">TIME_EVERY_CHECK=3</div><div class="line"></div><div class="line">#Control loop arg</div><div class="line">i = 0</div><div class="line"></div><div class="line">#返回数据的总数</div><div class="line">TOTAL = 20</div><div class="line"></div><div class="line">#redis链接池</div><div class="line">pool01 = redis.ConnectionPool(host=&apos;127.0.0.1&apos;, port=6379, db=1)</div><div class="line">pool02 = redis.ConnectionPool(host=&apos;127.0.0.1&apos;, port=6379, db=2)</div><div class="line">r01 = redis.StrictRedis(connection_pool=pool01)</div><div class="line">r02 = redis.StrictRedis(connection_pool=pool02)</div><div class="line"></div><div class="line">#图书馆头部信息</div><div class="line">Passlib =&quot;2016210942:123456&quot;</div><div class="line">b64Vallib = base64.b64encode(Passlib)</div><div class="line"></div><div class="line">#初始化APP</div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line">url01=&quot;https://taobao.com&quot;</div><div class="line">url02=&quot;https://ccnubox.muxixyz.com/api/lib/login/&quot;</div><div class="line"></div><div class="line">#配置</div><div class="line">app.config.update(</div><div class="line">    </div><div class="line">    CELERY_BROKER_URL=&apos;redis://127.0.0.1:6379&apos;,</div><div class="line">    CELERY_RESULT_BACKEND=&apos;redis://127.0.0.1:6379/0&apos;,    </div><div class="line">    #Timezone</div><div class="line">    CELERY_TIMEZONE = &apos;Asia/Shanghai&apos;,</div><div class="line"></div><div class="line">    #schedules</div><div class="line"></div><div class="line">    CELERYBEAT_SCHEDULE = &#123;</div><div class="line">        &apos;product&apos;:&#123;</div><div class="line">            &apos;task&apos;: &apos;product&apos;,</div><div class="line">            &apos;schedule&apos;: timedelta(seconds = TIME_EVERY_CHECK),</div><div class="line">        &#125;,</div><div class="line">        &apos;login_library&apos;:&#123;</div><div class="line">            &apos;task&apos;:&apos;login_lib&apos;,</div><div class="line">            &apos;schedule&apos;:timedelta(seconds = TIME_EVERY_CHECK),</div><div class="line">        &#125;,</div><div class="line">        &apos;controli&apos;:&#123;</div><div class="line">            &apos;task&apos;:&apos;controli&apos;,</div><div class="line">            &apos;schedule&apos;:timedelta(seconds = TIME_EVERY_CHECK),</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">app.config[&apos;JSON_AS_ASCII&apos;] = False</div><div class="line"></div><div class="line">celery = make_celery(app) </div><div class="line"></div><div class="line">#木犀产品展示</div><div class="line">@celery.task(name=&apos;product&apos;)</div><div class="line">def product():</div><div class="line">    resp01 = requests.get(url01)</div><div class="line">    statu01 = resp01.status_code</div><div class="line">    r01.set(i,statu01)</div><div class="line"></div><div class="line">#登录CCNU图书馆 </div><div class="line">@celery.task(name=&apos;login_lib&apos;)</div><div class="line">def login_lib():</div><div class="line">    resp02= requests.get(url02,headers = &#123;&quot;Authorization&quot;: &quot;Basic %s&quot; %b64Vallib&#125;)</div><div class="line">    statu02 = resp02.status_code</div><div class="line">    r02.set(i,statu02)</div><div class="line"></div><div class="line">@celery.task(name=&apos;controli&apos;)</div><div class="line">def controli():</div><div class="line">    global i</div><div class="line">    if i &lt; TOTAL-1:</div><div class="line">        i = i+1</div><div class="line">    elif i == TOTAL-1:</div><div class="line">        i = 0</div><div class="line">@app.route(&quot;/&quot;)</div><div class="line">def index():</div><div class="line">    return jsonify(&#123;</div><div class="line">        &quot;木犀产品展示&quot;:[r01.get(k) for k in range(TOTAL)],</div><div class="line">        &quot;登录图书馆&quot;:[r02.get(k) for k in range(TOTAL)]</div><div class="line">    &#125;)</div><div class="line">if __name__ ==&apos;__main__&apos;:</div><div class="line">    app.run(debug=True)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<p>程序运行步骤</p>
+<blockquote>
+<p>1,flask project: python monitor.py runserver<br>2,redis: redis-server<br>3,celery(main process): celery worker - -app monitor.celery - -loglevel=info<br>4,celery(beat): celery beat - -app monitor.celery - -loglevel=info</p>
+<hr>
+<p>运行效果<br><a href="https://postimg.org/image/m5bjymmin/" target="_blank" rel="external"><img src="https://s11.postimg.org/ozepc2ooz/image.png" alt="效果图.png"></a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/06/Python核心编程第四章/" rel="prev" title="Python核心编程第四章">
+                Python核心编程第四章 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg"
+               alt="Humbert Zhang" />
+          <p class="site-author-name" itemprop="name">Humbert Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">一条咸鱼</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Humbert Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
