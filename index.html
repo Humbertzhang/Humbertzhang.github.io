@@ -263,7 +263,7 @@
               
                 
                 <a class="post-title-link" href="/2017/04/06/Python核心编程第四章/" itemprop="url">
-                  Python核心编程第四章
+                  Python核心编程四、五
                 </a>
               
             
@@ -348,6 +348,21 @@ False
 </code></pre><hr>
 <h3 id="可变类型与不可变类型"><a href="#可变类型与不可变类型" class="headerlink" title="可变类型与不可变类型"></a>可变类型与不可变类型</h3><p>可变类型：列表 字典<br>不可变类型：数字 字符串 元组<br>这些不可变类型在改变他们的值时ID便会改变<br>而可变类型在改变时则不会</p>
 <hr>
+<h3 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h3><pre><code>&gt;&gt;&gt; 1/2         #普通除法
+0
+&gt;&gt;&gt; 1.0/2.0
+0.5
+&gt;&gt;&gt; from __future__ import division
+&gt;&gt;&gt; 1/2
+0.5
+&gt;&gt;&gt; 1//2
+0
+&gt;&gt;&gt; 1.0//2.0
+0.0
+&gt;&gt;&gt; -1//2
+-1
+</code></pre><hr>
+<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><p>random.randrange(start,end) :返回(start,end)内的整数，即不包括两端<br>random.randint(start,end):随机返回[start,end]内的整数<br>random.uniform(start,end)：随机返回[strat,end]内的浮点数<br>random.choice(sequence)：随机返回sequence内的一个元素</p>
 
           
         
