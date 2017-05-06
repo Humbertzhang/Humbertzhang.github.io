@@ -103,7 +103,7 @@
 得到自己的IP与CDIRip -4 a
 
 1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt">
-<meta property="og:updated_time" content="2017-05-06T15:02:52.947Z">
+<meta property="og:updated_time" content="2017-05-06T15:15:58.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Docker部署ceph/demo">
 <meta name="twitter:description" content="环境：Ubuntu 16.04
@@ -349,7 +349,14 @@
 osd max object namespace len = 64
 </code></pre><p>##　部署ceph<br>仍然运行</p>
 <pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/21 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
-</code></pre>
+</code></pre><hr>
+<p>参考:</p>
+<ul>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/install/mirror.html" target="_blank" rel="external">Docker从入门到实践－镜像加速器</a></li>
+<li><a href="https://www.sebastien-han.fr/blog/2015/08/24/ceph-cluster-on-docker-for-testing/" target="_blank" rel="external">Ceph cluster on Docker for testing</a></li>
+<li><a href="https://hub.docker.com/r/ceph/demo/" target="_blank" rel="external">ceph/demo Docker Hub地址</a></li>
+</ul>
+
       
     </div>
 
