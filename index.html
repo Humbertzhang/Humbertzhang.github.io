@@ -333,7 +333,7 @@
        valid_lft forever preferred_lft forever
 </code></pre><p>2中的10.135.186.15即为ip，10.135.186.15/18为对应CDIR</p>
 <h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p>运行：</p>
-<pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/21 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
+<pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/18 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
 </code></pre><p>下载ceph/demo</p>
 <h2 id="针对ext4修改配置"><a href="#针对ext4修改配置" class="headerlink" title="针对ext4修改配置"></a>针对ext4修改配置</h2><p>官方不建议采用ext4文件系统作为ceph的后端文件系统，如果采用，那么对于ext4的filesystem，应该在/etc/ceph/ceph.conf中添加如下配置：</p>
 <pre><code>osd max object name len = 256
