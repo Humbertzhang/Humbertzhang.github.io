@@ -87,31 +87,27 @@
 
 
 
-<meta name="description" content="环境：Ubuntu 16.04
-安装Dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-使用阿里云镜像加速器阿里云镜像加速器按照指导修改文件
-得到自己的IP与CDIRip -4 a
+<meta name="description" content="用途最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．
 
-1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt">
+使用方法现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:
+git clone https://github.com/Humber">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Docker部署ceph/demo">
-<meta property="og:url" content="http://Humbertzhang.github.io/2017/05/06/使用Docker部署ceph-demo/index.html">
+<meta property="og:title" content="半自动FlaskAPI测试－Judgement">
+<meta property="og:url" content="http://Humbertzhang.github.io/2017/07/14/半自动FlaskAPI测试－Judgement/index.html">
 <meta property="og:site_name" content="Humbert's Blog">
-<meta property="og:description" content="环境：Ubuntu 16.04
-安装Dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-使用阿里云镜像加速器阿里云镜像加速器按照指导修改文件
-得到自己的IP与CDIRip -4 a
+<meta property="og:description" content="用途最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．
 
-1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt">
-<meta property="og:updated_time" content="2017-05-07T00:41:52.172Z">
+使用方法现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:
+git clone https://github.com/Humber">
+<meta property="og:image" content="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif">
+<meta property="og:updated_time" content="2017-07-14T05:58:58.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Docker部署ceph/demo">
-<meta name="twitter:description" content="环境：Ubuntu 16.04
-安装Dockercurl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-使用阿里云镜像加速器阿里云镜像加速器按照指导修改文件
-得到自己的IP与CDIRip -4 a
+<meta name="twitter:title" content="半自动FlaskAPI测试－Judgement">
+<meta name="twitter:description" content="用途最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．
 
-1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt">
+使用方法现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:
+git clone https://github.com/Humber">
+<meta name="twitter:image" content="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif">
 
 
 
@@ -139,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://Humbertzhang.github.io/2017/05/06/使用Docker部署ceph-demo/"/>
+  <link rel="canonical" href="http://Humbertzhang.github.io/2017/07/14/半自动FlaskAPI测试－Judgement/"/>
 
 
 
 
 
-  <title> 使用Docker部署ceph/demo | Humbert's Blog </title>
+  <title> 半自动FlaskAPI测试－Judgement | Humbert's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +250,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/05/06/使用Docker部署ceph-demo/">
+    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/07/14/半自动FlaskAPI测试－Judgement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Humbert Zhang">
@@ -275,7 +271,7 @@
             
             
               
-                使用Docker部署ceph/demo
+                半自动FlaskAPI测试－Judgement
               
             
           </h1>
@@ -290,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T22:50:44+08:00">
-                2017-05-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T13:16:34+08:00">
+                2017-07-14
               </time>
             
 
@@ -326,36 +322,24 @@
       
 
       
-        <p>环境：Ubuntu 16.04</p>
-<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-</code></pre><h2 id="使用阿里云镜像加速器"><a href="#使用阿里云镜像加速器" class="headerlink" title="使用阿里云镜像加速器"></a>使用阿里云镜像加速器</h2><p><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云镜像加速器</a><br>按照指导修改文件</p>
-<h2 id="得到自己的IP与CDIR"><a href="#得到自己的IP与CDIR" class="headerlink" title="得到自己的IP与CDIR"></a>得到自己的IP与CDIR</h2><pre><code>ip -4 a
-
-1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    inet 10.135.186.15/18 brd 10.135.191.255 scope global eth0
-       valid_lft forever preferred_lft forever
-3: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
-    inet 172.17.0.1/16 scope global docker0
-       valid_lft forever preferred_lft forever
-</code></pre><p>2中的10.135.186.15即为ip，10.135.186.15/18为对应CDIR</p>
-<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p>运行：</p>
-<pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/18 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
-</code></pre><p>下载ceph/demo</p>
-<h2 id="针对ext4修改配置"><a href="#针对ext4修改配置" class="headerlink" title="针对ext4修改配置"></a>针对ext4修改配置</h2><p>官方不建议采用ext4文件系统作为ceph的后端文件系统，如果采用，那么对于ext4的filesystem，应该在/etc/ceph/ceph.conf中添加如下配置：</p>
-<pre><code>osd max object name len = 256
-osd max object namespace len = 64
-</code></pre><h2 id="部署ceph"><a href="#部署ceph" class="headerlink" title="部署ceph"></a>部署ceph</h2><p>仍然运行</p>
-<pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/21 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
-</code></pre><hr>
-<p>参考:</p>
-<ul>
-<li><a href="https://yeasy.gitbooks.io/docker_practice/content/install/mirror.html" target="_blank" rel="external">Docker从入门到实践－镜像加速器</a></li>
-<li><a href="https://www.sebastien-han.fr/blog/2015/08/24/ceph-cluster-on-docker-for-testing/" target="_blank" rel="external">Ceph cluster on Docker for testing</a></li>
-<li><a href="https://hub.docker.com/r/ceph/demo/" target="_blank" rel="external">ceph/demo Docker Hub地址</a></li>
-</ul>
+        <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．</p>
+<hr>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:</p>
+<pre><code>git clone https://github.com/Humbertzhang/Judgement.git
+</code></pre><p>克隆下来后仓库的结构是这样的：</p>
+<pre><code>.
+├── judgement.py
+├── README.md
+└── test_apis
+    ├── forgive.py
+    ├── getinfo.py
+    ├── __init__.py
+    ├── signin.py
+    ├── signup.py
+    └── uploadtime.py
+</code></pre><p>其中<code>test_apis</code>文件夹是用来测试使用的，例如下图：<br><a href="https://cuntuku.com/image/44PCc" target="_blank" rel="external"><img src="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif" alt="judge_demo.gif"></a><br>在实际使用中输入的API Floder Address为我们的api存放的文件夹．接着judgement便会自动地在其所在的文件夹为我们生成API的测试，存放在自动生成的testByJudgement文件夹里．<br>judgement使用就是这样,肯定还有很多不足和可以改进的地方，欢迎 issue 和 pr.</p>
+<hr>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>主要便是调用了文件读写的api．<br>读取api文件夹中每个文件，然后对每一行进行检查，如果该行中有@api.route()字样便识别为一个api的开始，然后跳过接下来带有＂＠＂，＂＃＂的行和空行，读取其api名字与方法，根据不同的方法来file.writelines不同的内容．</p>
 
       
     </div>
@@ -386,8 +370,8 @@ osd max object namespace len = 64
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/06/Python核心编程第四章/" rel="next" title="Python核心编程四、五">
-                <i class="fa fa-chevron-left"></i> Python核心编程四、五
+              <a href="/2017/05/21/模拟登录下获取Cookie/" rel="next" title="模拟登录下获取Cookie">
+                <i class="fa fa-chevron-left"></i> 模拟登录下获取Cookie
               </a>
             
           </div>
@@ -395,10 +379,6 @@ osd max object namespace len = 64
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/08/Ubuntu上shadowsocks-chrome翻墙指南/" rel="prev" title="Ubuntu上shadowsocks+chrome翻墙指南">
-                Ubuntu上shadowsocks+chrome翻墙指南 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,7 +496,7 @@ osd max object namespace len = 64
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用阿里云镜像加速器"><span class="nav-number">2.</span> <span class="nav-text">使用阿里云镜像加速器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#得到自己的IP与CDIR"><span class="nav-number">3.</span> <span class="nav-text">得到自己的IP与CDIR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载镜像"><span class="nav-number">4.</span> <span class="nav-text">下载镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#针对ext4修改配置"><span class="nav-number">5.</span> <span class="nav-text">针对ext4修改配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署ceph"><span class="nav-number">6.</span> <span class="nav-text">部署ceph</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用途"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法"><span class="nav-number">3.</span> <span class="nav-text">实现方法</span></a></li></ol></div>
             
 
           </div>
