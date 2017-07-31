@@ -87,25 +87,19 @@
 
 
 
-<meta name="description" content="使用Docker部署的mysql来为flask提供数据支持1,拉取docker mysql镜像
-docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
-2,获取docker-mysql的内网地址　 
-docker inspect test-mysql | grep IP">
+<meta name="description" content="目的：使用Docker部署的mysql来为flask提供数据支持拉取docker mysql镜像docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
+获取docker-mysql的内网地址　docker inspect test-mysql | grep IPAddr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker-compose部署MysqlInDocker+Flask">
 <meta property="og:url" content="http://Humbertzhang.github.io/2017/07/31/docker-compose部署MysqlInDocker+Flask/index.html">
 <meta property="og:site_name" content="Humbert's Blog">
-<meta property="og:description" content="使用Docker部署的mysql来为flask提供数据支持1,拉取docker mysql镜像
-docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
-2,获取docker-mysql的内网地址　 
-docker inspect test-mysql | grep IP">
-<meta property="og:updated_time" content="2017-07-31T03:42:09.740Z">
+<meta property="og:description" content="目的：使用Docker部署的mysql来为flask提供数据支持拉取docker mysql镜像docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
+获取docker-mysql的内网地址　docker inspect test-mysql | grep IPAddr">
+<meta property="og:updated_time" content="2017-07-31T03:46:27.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker-compose部署MysqlInDocker+Flask">
-<meta name="twitter:description" content="使用Docker部署的mysql来为flask提供数据支持1,拉取docker mysql镜像
-docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
-2,获取docker-mysql的内网地址　 
-docker inspect test-mysql | grep IP">
+<meta name="twitter:description" content="目的：使用Docker部署的mysql来为flask提供数据支持拉取docker mysql镜像docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
+获取docker-mysql的内网地址　docker inspect test-mysql | grep IPAddr">
 
 
 
@@ -320,21 +314,17 @@ docker inspect test-mysql | grep IP">
       
 
       
-        <h1 id="使用Docker部署的mysql来为flask提供数据支持"><a href="#使用Docker部署的mysql来为flask提供数据支持" class="headerlink" title="使用Docker部署的mysql来为flask提供数据支持"></a>使用Docker部署的mysql来为flask提供数据支持</h1><p>1,拉取docker mysql镜像</p>
-<pre><code>docker run --detach --name=test-mysql --env=&quot;MYSQL_ROOT_PASSWORD=mypassword&quot; mysql
-</code></pre><p>2,获取docker-mysql的内网地址　 </p>
-<pre><code>docker inspect test-mysql | grep IPAddress
+        <h3 id="目的：使用Docker部署的mysql来为flask提供数据支持"><a href="#目的：使用Docker部署的mysql来为flask提供数据支持" class="headerlink" title="目的：使用Docker部署的mysql来为flask提供数据支持"></a>目的：使用Docker部署的mysql来为flask提供数据支持</h3><h3 id="拉取docker-mysql镜像"><a href="#拉取docker-mysql镜像" class="headerlink" title="拉取docker mysql镜像"></a>拉取docker mysql镜像</h3><pre><code>docker run --detach --name=test-mysql --env=&quot;MYSQL_ROOT_PASSWORD=mypassword&quot; mysql
+</code></pre><h3 id="获取docker-mysql的内网地址"><a href="#获取docker-mysql的内网地址" class="headerlink" title="获取docker-mysql的内网地址　"></a>获取docker-mysql的内网地址　</h3><pre><code>docker inspect test-mysql | grep IPAddress
 </code></pre><p>我得到的IPAddress为<code>172.17.0.20</code></p>
 <p>使用本地的mysql在其中加入新数据库,其中-h 后对应的即为上面的IPAdress ,-P对应mysql的默认端口3306.</p>
 <pre><code>mysql -uroot -pmypassword -h 172.17.0.20 -P 3306
 </code></pre><p>在数据库中输入</p>
 <pre><code>CREATE DATABASE TEST
-</code></pre><p>加完后，添加config.py中相应的.env文件，<br>MYSQL_URI=mysql://root:mypassword@mysql:3306/TEST</p>
-<p>4,使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</p>
-<pre><code>external_links: 
+</code></pre><p>加完后，添加config.py中相应的.env文件，<br>    MYSQL_URI=mysql://root:mypassword@mysql:3306/TEST</p>
+<h3 id="使用docker-ps得到test-mysql的容器ID-根据容器的ID在docker-compose-yml中flask对应的容器中添加"><a href="#使用docker-ps得到test-mysql的容器ID-根据容器的ID在docker-compose-yml中flask对应的容器中添加" class="headerlink" title="使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加"></a>使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</h3><pre><code>external_links: 
         - CONTAINER_ID:mysql
-</code></pre><p>3,之后使用</p>
-<pre><code>docker-compose build
+</code></pre><h3 id="之后使用"><a href="#之后使用" class="headerlink" title="之后使用"></a>之后使用</h3><pre><code>docker-compose build
 docker-compose up &amp;
 </code></pre><p>来将项目部署起来</p>
 <p>之后需要初始化数据库（仅初次部署需要）</p>
@@ -504,7 +494,7 @@ $ docker exec &lt;container id&gt; python manage.py test
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Docker部署的mysql来为flask提供数据支持"><span class="nav-number">1.</span> <span class="nav-text">使用Docker部署的mysql来为flask提供数据支持</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目的：使用Docker部署的mysql来为flask提供数据支持"><span class="nav-number">1.</span> <span class="nav-text">目的：使用Docker部署的mysql来为flask提供数据支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉取docker-mysql镜像"><span class="nav-number">2.</span> <span class="nav-text">拉取docker mysql镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取docker-mysql的内网地址"><span class="nav-number">3.</span> <span class="nav-text">获取docker-mysql的内网地址　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用docker-ps得到test-mysql的容器ID-根据容器的ID在docker-compose-yml中flask对应的容器中添加"><span class="nav-number">4.</span> <span class="nav-text">使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#之后使用"><span class="nav-number">5.</span> <span class="nav-text">之后使用</span></a></li></ol></div>
             
 
           </div>
