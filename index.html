@@ -240,6 +240,151 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/07/31/docker-compose部署MysqlInDocker+Flask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Humbert Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Humbert's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/31/docker-compose部署MysqlInDocker+Flask/" itemprop="url">
+                  docker-compose部署MysqlInDocker+Flask
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T11:24:50+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用Docker部署的mysql来为flask提供数据支持"><a href="#使用Docker部署的mysql来为flask提供数据支持" class="headerlink" title="使用Docker部署的mysql来为flask提供数据支持"></a>使用Docker部署的mysql来为flask提供数据支持</h1><p>1,拉取docker mysql镜像</p>
+<pre><code>docker run --detach --name=test-mysql --env=&quot;MYSQL_ROOT_PASSWORD=mypassword&quot; mysql
+</code></pre><p>2,获取docker-mysql的内网地址　 </p>
+<pre><code>docker inspect test-mysql | grep IPAddress
+</code></pre><p>我得到的IPAddress为<code>172.17.0.20</code></p>
+<p>使用本地的mysql在其中加入新数据库,其中-h 后对应的即为上面的IPAdress ,-P对应mysql的默认端口3306.</p>
+<pre><code>mysql -uroot -pmypassword -h 172.17.0.20 -P 3306
+</code></pre><p>在数据库中输入</p>
+<pre><code>CREATE DATABASE TEST
+</code></pre><p>加完后，添加config.py中相应的.env文件，<br>MYSQL_URI=mysql://root:mypassword@mysql:3306/TEST</p>
+<p>4,使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</p>
+<pre><code>external_links: 
+        - CONTAINER_ID:mysql
+</code></pre><p>3,之后使用</p>
+<pre><code>docker-compose build
+docker-compose up &amp;
+</code></pre><p>来将项目部署起来</p>
+<p>之后需要初始化数据库（仅初次部署需要）</p>
+<p>在服务器上运行(注意需在manage.py中添加对应命令)：</p>
+<pre><code>$ docker exec &lt;container id&gt; python manage.py db init
+$ docker exec &lt;container id&gt; python manage.py db migrate
+$ docker exec &lt;container id&gt; python manage.py db upgrade
+$ docker exec &lt;container id&gt; python manage.py insert_roles
+$ docker exec &lt;container id&gt; python manage.py add_test_admin
+$ docker exec &lt;container id&gt; python manage.py test
+</code></pre><p>迁移数据库后（如果后续部署中修改了数据模型结构）<br>在服务器上运行：</p>
+<p>   $ docker exec <container id=""> python manage.py db migrate<br>   $ docker exec <container id=""> python manage.py db upgrade</container></container></p>
+<p>此时该项目就可以正常与docker中的mysql相连了</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/07/14/半自动FlaskAPI测试－Judgement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1248,7 +1393,7 @@ False
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
