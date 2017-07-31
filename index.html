@@ -348,6 +348,10 @@ $ docker exec &lt;container id&gt; python manage.py test
 </code></pre><p>迁移数据库后（如果后续部署中修改了数据模型结构）<br>在服务器上运行：</p>
 <p>   $ docker exec <container id=""> python manage.py db migrate<br>   $ docker exec <container id=""> python manage.py db upgrade</container></container></p>
 <p>此时该项目就可以正常与docker中的mysql相连了</p>
+<p>Refrence:</p>
+<ul>
+<li><a href="https://severalnines.com/blog/mysql-docker-containers-understanding-basics" target="_blank" rel="external">MySQL Docker Containers: Understanding the basics</a></li>
+</ul>
 
           
         
