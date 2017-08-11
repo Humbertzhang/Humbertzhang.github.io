@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="TDDWorkFlow后端测试驱动开发流程测试驱动开发什么是测试驱动开发（TDD）测试驱动开发的基本思想就是在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。
+测试驱动开发的好处
+测试驱动开发可以使我们仔细思考需求，减少后期的修改
+在测试驱动开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试驱动开发流程.md">
+<meta property="og:url" content="http://Humbertzhang.github.io/2017/08/11/测试驱动开发流程-md/index.html">
+<meta property="og:site_name" content="Humbert's Blog">
+<meta property="og:description" content="TDDWorkFlow后端测试驱动开发流程测试驱动开发什么是测试驱动开发（TDD）测试驱动开发的基本思想就是在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。
+测试驱动开发的好处
+测试驱动开发可以使我们仔细思考需求，减少后期的修改
+在测试驱动开">
+<meta property="og:updated_time" content="2017-08-11T03:36:29.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="测试驱动开发流程.md">
+<meta name="twitter:description" content="TDDWorkFlow后端测试驱动开发流程测试驱动开发什么是测试驱动开发（TDD）测试驱动开发的基本思想就是在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。
+测试驱动开发的好处
+测试驱动开发可以使我们仔细思考需求，减少后期的修改
+在测试驱动开">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Humbertzhang.github.io/2017/08/11/测试驱动开发流程-md/"/>
+
+
+
+
+
+  <title> 测试驱动开发流程.md | Humbert's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Humbert's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欲变世界，先变自身</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/08/11/测试驱动开发流程-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Humbert Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Humbert's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                测试驱动开发流程.md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T11:36:08+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="TDDWorkFlow"><a href="#TDDWorkFlow" class="headerlink" title="TDDWorkFlow"></a>TDDWorkFlow</h1><h1 id="后端测试驱动开发流程"><a href="#后端测试驱动开发流程" class="headerlink" title="后端测试驱动开发流程"></a>后端测试驱动开发流程</h1><h2 id="测试驱动开发"><a href="#测试驱动开发" class="headerlink" title="测试驱动开发"></a>测试驱动开发</h2><h4 id="什么是测试驱动开发（TDD）"><a href="#什么是测试驱动开发（TDD）" class="headerlink" title="什么是测试驱动开发（TDD）"></a>什么是测试驱动开发（TDD）</h4><p>测试驱动开发的基本思想就是在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。</p>
+<h4 id="测试驱动开发的好处"><a href="#测试驱动开发的好处" class="headerlink" title="测试驱动开发的好处"></a>测试驱动开发的好处</h4><ul>
+<li>测试驱动开发可以使我们仔细思考需求，减少后期的修改</li>
+<li>在测试驱动开发过程中，我们会对相应的功能进行分解与设计，可以提高代码的内聚性与复用性</li>
+<li>测试驱动开发可以使我们快速找出Bug,并提高我们的修改代码的自信</li>
+</ul>
+<h4 id="测试驱动开发过程"><a href="#测试驱动开发过程" class="headerlink" title="测试驱动开发过程"></a>测试驱动开发过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1） 明确当前要完成的功能。可以记录成一个 TODO 列表。</div><div class="line">2） 快速完成针对此功能的测试用例编写。</div><div class="line">3） 测试代码编译不通过。 </div><div class="line">4） 编写对应的功能代码。 </div><div class="line">5） 测试通过。 </div><div class="line">6） 对代码进行重构，并保证测试通过。 </div><div class="line">7） 循环完成所有功能的开发。</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="我们的开发流程"><a href="#我们的开发流程" class="headerlink" title="我们的开发流程"></a>我们的开发流程</h2><h4 id="1，确定API文档"><a href="#1，确定API文档" class="headerlink" title="1，确定API文档"></a>1，确定API文档</h4><p>首先，后端应根据需求进行数据库的设计，API功能的确定以及API文档的编写。<br>编写完API文档之后，应与一起开发的前端人员一起确定API文档中的各个API，反复修改直到达成约定。</p>
+<h4 id="2，编写项目骨架"><a href="#2，编写项目骨架" class="headerlink" title="2，编写项目骨架"></a>2，编写项目骨架</h4><p>根据之前设计的数据库等，编写相应的models.py以及其他必不可少的组成部分，具体可见下面的实战。</p>
+<h4 id="3，测试驱动开发API"><a href="#3，测试驱动开发API" class="headerlink" title="3，测试驱动开发API"></a>3，测试驱动开发API</h4><p>根据测试开发的过程，编写测试以及API</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>在这里，我们会编写一个带有用户系统的，前后端分离的简单Demo.他的功能是当你在注册登录后，使用GET方法访问相应API时，他会返回用户名字．使用PUT方法访问相应API时，可以修改名字．<br>你可以在<a href="https://github.com/Humbertzhang/TDDWorkFlow" target="_blank" rel="external">我的github仓库</a>中查看代码</p>
+<h4 id="1，确定API文档-1"><a href="#1，确定API文档-1" class="headerlink" title="1，确定API文档"></a>1，确定API文档</h4><p><code>注册</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">Header</th>
+<th style="text-align:left">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/api/v1.0/signup/</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">POST</td>
+</tr>
+</tbody>
+</table>
+<p><strong>POST data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;username&quot;: string,     //用户名</div><div class="line">    &quot;password&quot;: string,     //用户密码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>Return data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;created&quot;: int         //用户ID</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>登录</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">Header</th>
+<th style="text-align:left">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/api/v1.0/signin/</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">POST</td>
+</tr>
+</tbody>
+</table>
+<p><strong>POST data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;username&quot;: string,     //用户名</div><div class="line">    &quot;password&quot;: string,     //用户密码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>Return data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;uid&quot;:Int</div><div class="line">    &quot;token&quot;:String</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>获取用户名字</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">Header</th>
+<th style="text-align:left">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/api/v1.0/<code>&lt;int:id&gt;</code>/</td>
+<td style="text-align:left">Authorization:Basic Base64Token</td>
+<td style="text-align:left">GET</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;username&quot;:String</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>修改用户名字</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">Header</th>
+<th style="text-align:left">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/api/v1.0/<code>&lt;int:id&gt;</code>/</td>
+<td style="text-align:left">Authorization:Basic Base64Token</td>
+<td style="text-align:left">PUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PUT data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;username&quot;:String</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>Return data(json):</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;message&quot;:&quot;modiry&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="2，编写项目骨架-1"><a href="#2，编写项目骨架-1" class="headerlink" title="2，编写项目骨架"></a>2，编写项目骨架</h4><p>Demo的文件结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── APIdoc.md</div><div class="line">├── Demo</div><div class="line">│   ├── app</div><div class="line">│   │   ├── api</div><div class="line">│   │   │   └── __init__.py</div><div class="line">│   │   ├── __init__.py</div><div class="line">│   │   └── models.py</div><div class="line">│   ├── config.py</div><div class="line">│   ├── manage.py</div><div class="line">│   └── requirements.txt</div><div class="line">└── README.md</div></pre></td></tr></table></figure></p>
+<p>根据仓库中的代码来完善好config.py manage.py requirements.txt model.py 以及各个<code>__init__.py</code><br>如果你是克隆的仓库，可以使用<code>git checkout a1ff2d4</code> 来切换到搭建完骨架之后</p>
+<h4 id="3，测试驱动开发API-1"><a href="#3，测试驱动开发API-1" class="headerlink" title="3，测试驱动开发API"></a>3，测试驱动开发API</h4><p>在manage.py 所在的文件夹下，创建<code>test</code>文件夹，在<code>test</code>文件夹下创建<code>test.py</code>．</p>
+<p>根据仓库中的代码编写测试，并运行，得到预料中的False.</p>
+<p>之后，根据在测试中所编写的测试用例完善api文件夹中的各个API,每次写完某个API之后就应运行一下测试(<code>python manage.py test</code>),判断是否符合预期．<br>若要修改功能，也应先修改测试用例，再修改API.</p>
+<p>你分别可以使用 <code>git checkout &lt;HEAD_ID&gt;</code> 来跳到相应的版本</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">History</th>
+<th style="text-align:left">HEAD ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Test.py编写完成</td>
+<td style="text-align:left">cebecb4</td>
+</tr>
+<tr>
+<td style="text-align:left">Signup完成</td>
+<td style="text-align:left">f7c88dc</td>
+</tr>
+<tr>
+<td style="text-align:left">Signin完成</td>
+<td style="text-align:left">0740636</td>
+</tr>
+<tr>
+<td style="text-align:left">Getname API完成</td>
+<td style="text-align:left">a75f76e</td>
+</tr>
+<tr>
+<td style="text-align:left">ChangeName API完成</td>
+<td style="text-align:left">e3102c1</td>
+</tr>
+</tbody>
+</table>
+<p>测试前不要忘记初始化数据库！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python manage.py db init</div><div class="line">python manage.py db migrate</div><div class="line">python manage.py db upgrade</div></pre></td></tr></table></figure></p>
+<p>Refrence : <a href="https://www.ibm.com/developerworks/cn/linux/l-tdd/" target="_blank" rel="external">浅谈测试驱动开发（TDD）</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/31/docker-compose部署MysqlInDocker+Flask/" rel="next" title="使用Mysql_In_Docker为docker部署的Flask提供数据库支持">
+                <i class="fa fa-chevron-left"></i> 使用Mysql_In_Docker为docker部署的Flask提供数据库支持
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg"
+               alt="Humbert Zhang" />
+          <p class="site-author-name" itemprop="name">Humbert Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">一条咸鱼</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TDDWorkFlow"><span class="nav-number">1.</span> <span class="nav-text">TDDWorkFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后端测试驱动开发流程"><span class="nav-number">2.</span> <span class="nav-text">后端测试驱动开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试驱动开发"><span class="nav-number">2.1.</span> <span class="nav-text">测试驱动开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是测试驱动开发（TDD）"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">什么是测试驱动开发（TDD）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试驱动开发的好处"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">测试驱动开发的好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试驱动开发过程"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">测试驱动开发过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们的开发流程"><span class="nav-number">2.2.</span> <span class="nav-text">我们的开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，确定API文档"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">1，确定API文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，编写项目骨架"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">2，编写项目骨架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3，测试驱动开发API"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">3，测试驱动开发API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战"><span class="nav-number">2.3.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，确定API文档-1"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">1，确定API文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，编写项目骨架-1"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">2，编写项目骨架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3，测试驱动开发API-1"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">3，测试驱动开发API</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Humbert Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
