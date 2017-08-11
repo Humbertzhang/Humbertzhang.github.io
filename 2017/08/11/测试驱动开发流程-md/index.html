@@ -99,7 +99,7 @@
 测试驱动开发的好处
 测试驱动开发可以使我们仔细思考需求，减少后期的修改
 在测试驱动开">
-<meta property="og:updated_time" content="2017-08-11T03:36:29.589Z">
+<meta property="og:updated_time" content="2017-08-11T03:38:46.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="测试驱动开发流程.md">
 <meta name="twitter:description" content="TDDWorkFlow后端测试驱动开发流程测试驱动开发什么是测试驱动开发（TDD）测试驱动开发的基本思想就是在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。
@@ -331,6 +331,7 @@
 <h2 id="我们的开发流程"><a href="#我们的开发流程" class="headerlink" title="我们的开发流程"></a>我们的开发流程</h2><h4 id="1，确定API文档"><a href="#1，确定API文档" class="headerlink" title="1，确定API文档"></a>1，确定API文档</h4><p>首先，后端应根据需求进行数据库的设计，API功能的确定以及API文档的编写。<br>编写完API文档之后，应与一起开发的前端人员一起确定API文档中的各个API，反复修改直到达成约定。</p>
 <h4 id="2，编写项目骨架"><a href="#2，编写项目骨架" class="headerlink" title="2，编写项目骨架"></a>2，编写项目骨架</h4><p>根据之前设计的数据库等，编写相应的models.py以及其他必不可少的组成部分，具体可见下面的实战。</p>
 <h4 id="3，测试驱动开发API"><a href="#3，测试驱动开发API" class="headerlink" title="3，测试驱动开发API"></a>3，测试驱动开发API</h4><p>根据测试开发的过程，编写测试以及API</p>
+<hr>
 <h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>在这里，我们会编写一个带有用户系统的，前后端分离的简单Demo.他的功能是当你在注册登录后，使用GET方法访问相应API时，他会返回用户名字．使用PUT方法访问相应API时，可以修改名字．<br>你可以在<a href="https://github.com/Humbertzhang/TDDWorkFlow" target="_blank" rel="external">我的github仓库</a>中查看代码</p>
 <h4 id="1，确定API文档-1"><a href="#1，确定API文档-1" class="headerlink" title="1，确定API文档"></a>1，确定API文档</h4><p><code>注册</code></p>
 <table>
