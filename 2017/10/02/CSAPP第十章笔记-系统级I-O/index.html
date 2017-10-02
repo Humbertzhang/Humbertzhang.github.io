@@ -1,0 +1,761 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="第十章系统级I/OUnix I/O所有I/O设备都被模型化为文件,　因此所有输入输出都被当作文件读写，　也因此所有输入输出都可以用一致的方式(Unix I/O)来执行:
+
+打开文件通过内核来打开一个文件，并返回相应的文件描述符．内核记录文件的所有信息打开文件的应用程序只需要记住描述符.每个进程一开始就有三个描述符:0(标准输入),1(标准输出),2(标准错误),因此其他描述符从3开始．
+改变当前文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP第十章笔记:系统级I/O">
+<meta property="og:url" content="http://Humbertzhang.github.io/2017/10/02/CSAPP第十章笔记-系统级I-O/index.html">
+<meta property="og:site_name" content="Humbert's Blog">
+<meta property="og:description" content="第十章系统级I/OUnix I/O所有I/O设备都被模型化为文件,　因此所有输入输出都被当作文件读写，　也因此所有输入输出都可以用一致的方式(Unix I/O)来执行:
+
+打开文件通过内核来打开一个文件，并返回相应的文件描述符．内核记录文件的所有信息打开文件的应用程序只需要记住描述符.每个进程一开始就有三个描述符:0(标准输入),1(标准输出),2(标准错误),因此其他描述符从3开始．
+改变当前文">
+<meta property="og:image" content="https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/21/img/fs-tty-fd.png">
+<meta property="og:image" content="http://www.programering.com/images/remote/ZnJvbT1jbmJsb2dzJnVybD13WnVCbkx6WW1ZeWdEWjRBRE94QXpNbUJUTTRnVE56UWpNMk1qTXpZMk16UXpNemdUTHlFRE54QWpNM0F6THhBRE54QWpNdlVqTTRnak4wOHladnhtWXYwMmJqNXladnhtWTBsbWJqNXljbGRXWXRsMkx2b0RjMFJIYQ.jpg">
+<meta property="og:image" content="http://www.programering.com/images/remote/ZnJvbT1jc2RuJnVybD1RM2NoVkVhMFYzYlQ5U2UwbG1kaEozWnZBek52VW1kczkyY3psR1p2MFRQQjEwUUd0V1VDcEVNSjlDYnNsbVp2QURNMDhTWjZsMmMwNTJibTlDVnl3VU5NWlRZMThDZHU5bVp2MFRQQjlFTnJSbFQwRWthTmhYUVVSbWRSaGxXMVZUYWl0bVR6a1ZkakpqWXpwa01NWjNiRU5HTVNoVVl2UUhlbFIzTHk4eWF5RldieVZHZGhkM1B5WURNNFVqTXhBVE15RWpNeE1UTXdJekwwVm1idTRHWnpObUxuOUdiaTV5WnRsMkx2b0RjMFJIYQ.jpg">
+<meta property="og:image" content="http://pic2.zhimg.com/50/v2-61b934c2a0efe443dcd91370b8ab48e1_r.jpg">
+<meta property="og:updated_time" content="2017-10-02T15:03:45.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP第十章笔记:系统级I/O">
+<meta name="twitter:description" content="第十章系统级I/OUnix I/O所有I/O设备都被模型化为文件,　因此所有输入输出都被当作文件读写，　也因此所有输入输出都可以用一致的方式(Unix I/O)来执行:
+
+打开文件通过内核来打开一个文件，并返回相应的文件描述符．内核记录文件的所有信息打开文件的应用程序只需要记住描述符.每个进程一开始就有三个描述符:0(标准输入),1(标准输出),2(标准错误),因此其他描述符从3开始．
+改变当前文">
+<meta name="twitter:image" content="https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/21/img/fs-tty-fd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Humbertzhang.github.io/2017/10/02/CSAPP第十章笔记-系统级I-O/"/>
+
+
+
+
+
+  <title> CSAPP第十章笔记:系统级I/O | Humbert's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Humbert's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欲变世界，先变自身</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://Humbertzhang.github.io/2017/10/02/CSAPP第十章笔记-系统级I-O/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Humbert Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Humbert's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSAPP第十章笔记:系统级I/O
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T22:41:25+08:00">
+                2017-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第十章系统级I-O"><a href="#第十章系统级I-O" class="headerlink" title="第十章系统级I/O"></a>第十章系统级I/O</h1><h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>所有I/O设备都被模型化为文件,　因此所有输入输出都被当作文件读写，　也因此所有输入输出都可以用一致的方式(Unix I/O)来执行:</p>
+<ol>
+<li>打开文件<br>通过<strong>内核</strong>来打开一个文件，并返回相应的文件描述符．<strong>内核</strong>记录文件的所有信息打开文件的应用程序只需要记住描述符.<br>每个进程一开始就有三个描述符:0(标准输入),1(标准输出),2(标准错误),因此其他描述符从3开始．</li>
+<li>改变当前文件的字节偏移量<br>将文件偏移量改为应有的偏移量.</li>
+<li>读写文件<br>读文件:从文件复制字节到内存，大于文件大小时返回EOF.<br>写文件:从内存复制字节到文件，然后更新字节偏移量.</li>
+<li>关闭文件<br><strong>内核</strong>关闭文件，释放打开文件时用的数据结构，使描述符重新可用.<br>当进程中止时，内核都会关闭其打开的所有文件．</li>
+</ol>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ul>
+<li>普通文件<br>包括文本文件(内含ASCII 或 Unicode)与二进制文件．</li>
+<li>目录<br>目录是包含一组链接的文件，每个链接都将一个文件名映射到一个文件（可为另一个目录）</li>
+<li>套接字<br>用来与另一个<strong>进程</strong>进行<strong>跨网络</strong>通信的文件</li>
+</ul>
+<h2 id="打开和关闭文件"><a href="#打开和关闭文件" class="headerlink" title="打开和关闭文件"></a>打开和关闭文件</h2><p>打开文件<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">char</span> *filename, <span class="keyword">int</span> flags, <span class="keyword">mode_t</span> mode)</span></span></div></pre></td></tr></table></figure></p>
+<p>flags参数：<br>可以使用<code>|</code>符号来一起使用多个参数．</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">O_RDONLY</td>
+<td style="text-align:left">只读</td>
+</tr>
+<tr>
+<td style="text-align:left">O_WRONLY</td>
+<td style="text-align:left">只写</td>
+</tr>
+<tr>
+<td style="text-align:left">O_RDWR</td>
+<td style="text-align:left">读写</td>
+</tr>
+<tr>
+<td style="text-align:left">O_CREAT</td>
+<td style="text-align:left">若不存在创建一个截断的空文件</td>
+</tr>
+<tr>
+<td style="text-align:left">O_TRUNC</td>
+<td style="text-align:left">若文件已存在就截断</td>
+</tr>
+<tr>
+<td style="text-align:left">O_APPEND</td>
+<td style="text-align:left">每次写之前将文件位置到文件结尾</td>
+</tr>
+</tbody>
+</table>
+<p><code>文件截断 : 有时候我们需要在文件尾端处截取一些数据以缩短文件。</code></p>
+<p>mode参数：若为创建一个新文件(O_CREAT), 则可以指定访问权限.</p>
+<p>关闭文件使用描述符即可关闭.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</div></pre></td></tr></table></figure></p>
+<h2 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;unistd.h&gt;</div><div class="line">ssize_t read(int fd, void *buf, size_t n);</div><div class="line">将文件中n个字符读到buf中</div><div class="line">ssize_t write(int fd, const void *buf, size_t n);</div><div class="line">将buf中n个字符写至fd所指文件中.</div><div class="line">ssize_t 为有符号大小</div><div class="line">size_t　为无符号大小</div></pre></td></tr></table></figure>
+<h2 id="Robust-I-O-健壮的IO包"><a href="#Robust-I-O-健壮的IO包" class="headerlink" title="Robust I/O:健壮的IO包"></a>Robust I/O:健壮的IO包</h2><h3 id="无缓冲的输入输出"><a href="#无缓冲的输入输出" class="headerlink" title="无缓冲的输入输出"></a>无缓冲的输入输出</h3><p>直接在文件与内存之间传输数据<br>在将二进制数据读写至网络和从网络读写二进制数据时很有用<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> rio_readn(<span class="keyword">int</span> fd, <span class="keyword">void</span> *usrbuf, <span class="keyword">size_t</span> n);</div><div class="line"><span class="keyword">ssize_t</span> rio_writen(<span class="keyword">int</span> fd, <span class="keyword">void</span> *usrbuf, <span class="keyword">size_t</span> n);</div></pre></td></tr></table></figure></p>
+<h3 id="有缓冲的输入输出"><a href="#有缓冲的输入输出" class="headerlink" title="有缓冲的输入输出"></a>有缓冲的输入输出</h3><p>在rio_t 结构体中的 rio_buf中存作为缓冲，之后再从中读取出来.</p>
+<p>rio_t 结构体<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#define RIO_BUFSIZE 8192</div><div class="line">typedef struct &#123;</div><div class="line">    int rio_fd;                     //与缓冲区绑定的描述符</div><div class="line">    int rio_cnt;                    //缓冲区还未读的字节数</div><div class="line">    char * rio_bufptr;              //缓冲区中下一个要被读的字节的指针</div><div class="line">    char rio_buf[RIO_BUFSIZE];      //缓冲区</div><div class="line">&#125;rio_t;</div></pre></td></tr></table></figure></p>
+<p>rio_readinitb函数 : 绑定fd与rio_t 结构体.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">void rio_readinitb(rio_t *rp, int fd)</div><div class="line">&#123;</div><div class="line">    rp -&gt; rio_fd = fd;</div><div class="line">    rp -&gt; rio_cnt = 0;  //还未读的字节初始化为0</div><div class="line">    rp -&gt; rio_bufptr = rp -&gt; rio_buf;   //将读取的指针指向缓冲区</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>rio_read函数<br>先从文件读到rio_t结构体缓存区，再memcpy到用户内存.<br>因为这个函数定义的输入输出与Linux系统中的read函数一致，所以用它来替换上文无缓冲输入输出中的read函数即可得到他的有缓冲版本-&gt;rio_readnb.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">static ssize_t rio_read(rio_t * rp, char *usrbuf, size_t n)</div><div class="line">&#123;</div><div class="line">    int cnt;</div><div class="line">    while(rp-&gt;rio_cnt &lt;= 0)&#123;    //若没有读到数据，则继续</div><div class="line">        rp-&gt;rio_cnt = read(rp-&gt;rio_fd, rp-&gt;rio_buf, sizeof(rp-&gt;rio_buf));</div><div class="line">        //将fd所指的文件传送sizeof(rp-&gt;rio_buf)个字符到rp-&gt;rio_buf所指的空间中.若成功则返回字符数给rio_cnt, 出错返回-1，无可读数据返回0．</div><div class="line">        if(rp -&gt; rio_cnt &lt; 0)&#123;      //对返回为-1作处理</div><div class="line">            if(errno != EINTR)</div><div class="line">                return -1;</div><div class="line">        &#125;</div><div class="line">        else if(rp-&gt;rio_cnt == 0)   //对未读做处理</div><div class="line">            return 0;</div><div class="line">        else</div><div class="line">            rp-&gt;rio_bufptr = rp -&gt; rio_buf; //一切正常则将读数据的指针指向保存数据的内存</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /*从rio_t结构体中的缓存中复制 min(n, rp-&gt;rio_cnt) 个字节到用户内存中*/</div><div class="line">    cnt = n;</div><div class="line">    if(rp -&gt; rio_cnt &lt; n)</div><div class="line">        cnt = rp -&gt;rio_cnt;</div><div class="line">    memcpy(usrbuf, rp-&gt;rio_bufptr, cnt);</div><div class="line">    rp -&gt; rio_bufptr += cnt;    //移动指针</div><div class="line">    rp -&gt; rio_cnt -= cnt;       //减少应读的字节数</div><div class="line">    return cnt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>rio_readlineb函数 : 读取一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">ssize_t rio_readlineb(rio_t *rp, void *usrbuf, size_t maxlen)</div><div class="line">&#123;</div><div class="line">    int n, rc;</div><div class="line">    char c, *bufp = usrbuf;</div><div class="line">    </div><div class="line">    for(n = 1; n &lt;maxlen; n++)&#123;</div><div class="line">        if((rc = rio_read(rp, &amp;c, 1)) == 1)&#123;//这样不也每次都读数据而陷入内核了吗?</div><div class="line">            *bufp++ = c;</div><div class="line">            if(c == &apos;\n&apos;)&#123;      //是换行符号则字符数+1并停止</div><div class="line">                n++;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        else if(rc == 0)&#123;</div><div class="line">            if(n == 1)</div><div class="line">                return 0;</div><div class="line">            else</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">            return -1;</div><div class="line">    &#125;</div><div class="line">    *bufp = 0;  //???</div><div class="line">    return n-1; //因为n从1开始，故n-1才为字节数目.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="读取文件元数据"><a href="#读取文件元数据" class="headerlink" title="读取文件元数据"></a>读取文件元数据</h2><p>元数据指用来<strong>表示数据的数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">int stat(const char *filename, struct stat *buf);//以文件名作为输入</div><div class="line">int fstat(int fd, struct stat *buf);             //以文件描述符作为输入</div><div class="line">他们会将文件转换为如下结构体,这些也就是所谓文件元数据</div><div class="line">struct stat &#123;</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    ino_t       st_ino;     /*inode*/</div><div class="line">    mode_t      st_mode;    /*文件类型与文件访问许可位*/</div><div class="line">    nlink_t     st_nlink;   /*hard links的number*/</div><div class="line">    uid_t       st_uid;     /*User ID of owner*/</div><div class="line">    gid_t       st_gid;     /*Group ID of owner*/</div><div class="line">    ...</div><div class="line">    off_t       st_size;    /*Total Size in bytes*/</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>inode表示文件位置, 更多关于inode可以看<a href="https://en.wikipedia.org/wiki/Inode" target="_blank" rel="external">inode-Wikipedia</a></p>
+<p>st_mode可以用以下宏谓词来确定文件类型:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">S_ISREG(m) -&gt;　m是一个普通文件吗?</div><div class="line">S_ISDIR(m) -&gt;  m是一个目录文件吗?</div><div class="line">S_ISSOCK(M) -&gt; m是一个套接字吗?</div></pre></td></tr></table></figure></p>
+<h2 id="读取目录内容"><a href="#读取目录内容" class="headerlink" title="读取目录内容"></a>读取目录内容</h2><p>opendir 函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;dirent.h&gt;</div><div class="line"></div><div class="line">DIR *opendir(const char *name);</div><div class="line">成功返回指向目录流的指针，出错返回NULL</div><div class="line">流　是对条目有序序列的一个抽象，这里指目录项的列表</div></pre></td></tr></table></figure></p>
+<p>readdir 函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#include &lt;dirent.h&gt;</div><div class="line">struct dirent *readdir(DIR *dirp);</div><div class="line">若成功，返回返回下一个目录项的指针</div><div class="line">若在该目录下没有更多的目录项或出错了，则返回NULL，并修改errno的值</div><div class="line"></div><div class="line">每个目录项的结构如下:</div><div class="line">struct dirent &#123;</div><div class="line">    ino_t   d_ino;      /*inode number,文件位置*/</div><div class="line">    char    d_name[256];   /*filename*/</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>closedir函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#include &lt;dirent.h&gt;</div><div class="line">int closedir(DIR *dirp);</div></pre></td></tr></table></figure></p>
+<p>关闭目录流并释放资源.</p>
+<p>大体来说，读取目录内容的流程为:<br>1,使用opendir来得到一个指向目录流的指针.<br>2,使用readdir来一个个读取目录中的所有项目直到返回NULL.<br>3,再用closedir来关闭目录流.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char **argv)</div><div class="line">&#123;</div><div class="line">    DIR *streamp;</div><div class="line">    struct dirent *dep;</div><div class="line">    </div><div class="line">    streamp = Opendir(argv[1]);</div><div class="line">    errno = 0;</div><div class="line">    while((dep = readdir(streamp)) != NULL)&#123;</div><div class="line">        printf(&quot;Found file: %s\n&quot;, dep-&gt;d_name);</div><div class="line">    &#125;</div><div class="line">    if(errno != 0)</div><div class="line">        unix_error(&quot;readdir error&quot;);</div><div class="line">    Closedir(streamp);</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="共享文件"><a href="#共享文件" class="headerlink" title="共享文件"></a>共享文件</h2><h3 id="内核如何表示打开的文件"><a href="#内核如何表示打开的文件" class="headerlink" title="内核如何表示打开的文件"></a>内核如何表示打开的文件</h3><p>内核用三个相关的数据结构来表示打开的文件</p>
+<ul>
+<li>描述符表(descriptor table)<br>每个进程都有自己的描述符表,表中每个表项由进程打开的文件描述符来索引的.每个打开的描述符<strong>表项</strong>指向文件表中的一个表项</li>
+<li>文件表(file table)<br>所有进程共用一个文件表,它表示所有打开的文件的集合.它包括的列有文件位置，引用计数,以及一个指向v-node表中对应表项的指针.内核会在一个表项的引用计数为0时删除一个表项.</li>
+<li>v-node 表<br>同为所有进程共用一张表，每个表项包括st_mode, st_size等stat结构中的大多数信息.<br>不同于inode, inode只是表示文件位置.</li>
+</ul>
+<p><img src="https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/21/img/fs-tty-fd.png" alt="三个表之间的图示"><br>注1:tty可以理解为一个交互环境，如终端.<br>注2:</p>
+<blockquote>
+<p>On Linux, the set of file descriptors open in a process can be<br>accessed under the path /proc/PID/fd/, where PID is the process<br>identifier.</p>
+</blockquote>
+<h3 id="父子进程如何共享打开文件列表"><a href="#父子进程如何共享打开文件列表" class="headerlink" title="父子进程如何共享打开文件列表"></a>父子进程如何共享打开文件列表</h3><p>调用fork()前只有父进程表指向文件表的指针,调用fork后子进程增加了对于文件表中相应文件的引用次数.而从file table到vnode table的引用是不受影响的.<br><img src="http://www.programering.com/images/remote/ZnJvbT1jbmJsb2dzJnVybD13WnVCbkx6WW1ZeWdEWjRBRE94QXpNbUJUTTRnVE56UWpNMk1qTXpZMk16UXpNemdUTHlFRE54QWpNM0F6THhBRE54QWpNdlVqTTRnak4wOHladnhtWXYwMmJqNXladnhtWTBsbWJqNXljbGRXWXRsMkx2b0RjMFJIYQ.jpg" alt=""></p>
+<h2 id="I-O重定向"><a href="#I-O重定向" class="headerlink" title="I/O重定向"></a>I/O重定向</h2><p>在shell中，可用 <code>&gt;</code> 符号来重定向输出到文件.<br>另一种方式是使用dup2函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;unistd.h&gt;</div><div class="line">int dup2(int oldfd, int newfd);</div><div class="line"></div><div class="line">成功返回非负描述符, 出错返回-1.</div><div class="line"></div><div class="line">dup2()函数复制该进程的描述符表中的oldfd的表项到newfd表项.覆盖newfd之前的内容.</div><div class="line">如果newfd已经打开了,dup2()会在复制oldfd之前关闭newfd.</div></pre></td></tr></table></figure></p>
+<p>.<br><img src="http://www.programering.com/images/remote/ZnJvbT1jc2RuJnVybD1RM2NoVkVhMFYzYlQ5U2UwbG1kaEozWnZBek52VW1kczkyY3psR1p2MFRQQjEwUUd0V1VDcEVNSjlDYnNsbVp2QURNMDhTWjZsMmMwNTJibTlDVnl3VU5NWlRZMThDZHU5bVp2MFRQQjlFTnJSbFQwRWthTmhYUVVSbWRSaGxXMVZUYWl0bVR6a1ZkakpqWXpwa01NWjNiRU5HTVNoVVl2UUhlbFIzTHk4eWF5RldieVZHZGhkM1B5WURNNFVqTXhBVE15RWpNeE1UTXdJekwwVm1idTRHWnpObUxuOUdiaTV5WnRsMkx2b0RjMFJIYQ.jpg" alt=""><br>如图,dup(4,1)会将标准输出(fd = 1)重定向到(fd = 4),即指向fileB.<br>之后fileA将会被关闭, file table到v-node table的引用会被删除, v-node table中对应项也会被释放.</p>
+<h2 id="标准I-O-＜stdio-h＞"><a href="#标准I-O-＜stdio-h＞" class="headerlink" title="标准I/O(＜stdio.h＞)"></a>标准I/O(＜stdio.h＞)</h2><p>包括:</p>
+<ul>
+<li>打开关闭文件的函数:fopen(), fclose()</li>
+<li>读写字节的函数:fread(), fwrite()</li>
+<li>读写字符串:fgets(), fputs()</li>
+<li>复杂格式化I/O:scanf(), printf()<br>标准I/O库将一个打开的文件模型化一个<strong>流</strong>,即一个指向FILE类型的结构的指针.<br>每个C程序在一开始就有三个打开的流:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">extern FILE *stdin;     文件描述符为0</div><div class="line">extern FILE *stdout;    文件描述符为1</div><div class="line">extern FILE *stderr;    文件描述符为2</div><div class="line">因为Linux中一切皆文件，所以一开始也打开stdin, stdout, stderr三个文件.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>FILE类型的流是对文件描述符和流缓冲区<strong>(</strong>使开销较大的Linux I/O函数调用次数尽可能小<strong>)</strong>的抽象．</p>
+<h2 id="使用I-O函数的建议与限制"><a href="#使用I-O函数的建议与限制" class="headerlink" title="使用I/O函数的建议与限制"></a>使用I/O函数的建议与限制</h2><p>本章讨论的所有I/O函数如下:<br><img src="http://pic2.zhimg.com/50/v2-61b934c2a0efe443dcd91370b8ab48e1_r.jpg" alt=""><br>可以看出标准I/O函数与RIO函数都是基于Unix I/O函数来实现的.</p>
+<h3 id="使用I-O函数的基本指导与建议"><a href="#使用I-O函数的基本指导与建议" class="headerlink" title="使用I/O函数的基本指导与建议:"></a>使用I/O函数的基本指导与建议:</h3><ul>
+<li>只要有可能就使用标准I/O．<br>对于磁盘与终端设备I/O来说, 标准I/O是首选.</li>
+<li>不要使用scanf或rio_readlineb来读取二进制文件.<br>因为二进制文件中可能有0xa字节，而他们在读取文本文件的函数中代表换行，但是在读取二进制文件过程中就会导致错误.</li>
+<li>对网络套接字的I/O使用rio函数</li>
+</ul>
+<h3 id="在标准I-O流中又存在着一些限制"><a href="#在标准I-O流中又存在着一些限制" class="headerlink" title="在标准I/O流中又存在着一些限制:"></a>在标准I/O流中又存在着一些限制:</h3><ul>
+<li>限制一:跟在输出函数后的输入函数．如果没有清空缓存区的函数(fflush)或重置当前文件位置的函数(fseek, fsetpos, rewind)调用，不能这样.</li>
+<li><p>限制二:跟在输入函数后的输出函数:若之间没有fseek, fsetpos, rewind的调用,且输入函数又不是自然结束，则不可在其后跟输出函数.</p>
+<p>而因为lseek函数在套接字中为非法的，因此不建议在网络套接字的读取中使用标准I/O函数，而是建议使用RIO函数.可用sprintf在内存中格式化一个字符串, 再用rio_writen写.或是用rio_readlineb读取一个文本行，再用sscanf从文本行提取不同字符串.</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/11/测试驱动开发流程-md/" rel="next" title="测试驱动开发流程">
+                <i class="fa fa-chevron-left"></i> 测试驱动开发流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/professional_primary.jpg"
+               alt="Humbert Zhang" />
+          <p class="site-author-name" itemprop="name">Humbert Zhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">一条咸鱼</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第十章系统级I-O"><span class="nav-number">1.</span> <span class="nav-text">第十章系统级I/O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unix-I-O"><span class="nav-number">1.1.</span> <span class="nav-text">Unix I/O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">1.2.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开和关闭文件"><span class="nav-number">1.3.</span> <span class="nav-text">打开和关闭文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写文件"><span class="nav-number">1.4.</span> <span class="nav-text">读写文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Robust-I-O-健壮的IO包"><span class="nav-number">1.5.</span> <span class="nav-text">Robust I/O:健壮的IO包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无缓冲的输入输出"><span class="nav-number">1.5.1.</span> <span class="nav-text">无缓冲的输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有缓冲的输入输出"><span class="nav-number">1.5.2.</span> <span class="nav-text">有缓冲的输入输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件元数据"><span class="nav-number">1.6.</span> <span class="nav-text">读取文件元数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取目录内容"><span class="nav-number">1.7.</span> <span class="nav-text">读取目录内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享文件"><span class="nav-number">1.8.</span> <span class="nav-text">共享文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核如何表示打开的文件"><span class="nav-number">1.8.1.</span> <span class="nav-text">内核如何表示打开的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父子进程如何共享打开文件列表"><span class="nav-number">1.8.2.</span> <span class="nav-text">父子进程如何共享打开文件列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O重定向"><span class="nav-number">1.9.</span> <span class="nav-text">I/O重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O-＜stdio-h＞"><span class="nav-number">1.10.</span> <span class="nav-text">标准I/O(＜stdio.h＞)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用I-O函数的建议与限制"><span class="nav-number">1.11.</span> <span class="nav-text">使用I/O函数的建议与限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用I-O函数的基本指导与建议"><span class="nav-number">1.11.1.</span> <span class="nav-text">使用I/O函数的基本指导与建议:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在标准I-O流中又存在着一些限制"><span class="nav-number">1.11.2.</span> <span class="nav-text">在标准I/O流中又存在着一些限制:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Humbert Zhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
