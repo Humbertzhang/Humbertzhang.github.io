@@ -83,7 +83,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </span>
@@ -121,7 +121,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-number">1.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“is”-和-“-”"><span class="toc-number">2.</span> <span class="toc-text">“is” 和 “==”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变类型与不可变类型"><span class="toc-number">3.</span> <span class="toc-text">可变类型与不可变类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#除法"><span class="toc-number">4.</span> <span class="toc-text">除法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Random"><span class="toc-number">5.</span> <span class="toc-text">Random</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">“is” 和 “==”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">可变类型与不可变类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">除法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">Random</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -156,7 +156,7 @@
 
   <div class="content" itemprop="articleBody">
     <hr>
-<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>string[start:end:steps]  OR string[start:end]<br>如：</p>
+<h3><span id="切片">切片</span></h3><p>string[start:end:steps]  OR string[start:end]<br>如：</p>
 <pre><code>&gt;&gt;&gt; str
 &apos;abcdefghijklmn&apos;
 &gt;&gt;&gt; str[0:3]
@@ -164,7 +164,7 @@
 &gt;&gt;&gt; str[1:9:3]
 &apos;beh&apos;
 </code></pre><hr>
-<h3 id="“is”-和-“-”"><a href="#“is”-和-“-”" class="headerlink" title="“is” 和 “==”"></a>“is” 和 “==”</h3><p>“is” 比较的是两个对象的id<br>“==” 比较的是两个对象的值<br>且在Python中[-256,256]范围内的<code>整数</code>，无论谁等于他们，id 都一样<br>因为在Python中令变量等于[-256,256]范围内的值只会用他们引用那些数<br>ps:对象的三个属性，id,type,value</p>
+<h3><span id="is-和">“is” 和 “==”</span></h3><p>“is” 比较的是两个对象的id<br>“==” 比较的是两个对象的值<br>且在Python中[-256,256]范围内的<code>整数</code>，无论谁等于他们，id 都一样<br>因为在Python中令变量等于[-256,256]范围内的值只会用他们引用那些数<br>ps:对象的三个属性，id,type,value</p>
 <pre><code>&gt;&gt;&gt; a = 256
 &gt;&gt;&gt; b = 256
 &gt;&gt;&gt; c = 256.0
@@ -184,9 +184,9 @@ False
 &gt;&gt;&gt; e is f
 False
 </code></pre><hr>
-<h3 id="可变类型与不可变类型"><a href="#可变类型与不可变类型" class="headerlink" title="可变类型与不可变类型"></a>可变类型与不可变类型</h3><p>可变类型：列表 字典<br>不可变类型：数字 字符串 元组<br>这些不可变类型在改变他们的值时ID便会改变<br>而可变类型在改变时则不会</p>
+<h3><span id="可变类型与不可变类型">可变类型与不可变类型</span></h3><p>可变类型：列表 字典<br>不可变类型：数字 字符串 元组<br>这些不可变类型在改变他们的值时ID便会改变<br>而可变类型在改变时则不会</p>
 <hr>
-<h3 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h3><pre><code>&gt;&gt;&gt; 1/2         #普通除法
+<h3><span id="除法">除法</span></h3><pre><code>&gt;&gt;&gt; 1/2         #普通除法
 0
 &gt;&gt;&gt; 1.0/2.0
 0.5
@@ -200,7 +200,7 @@ False
 &gt;&gt;&gt; -1//2
 -1
 </code></pre><hr>
-<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><p>random.randrange(start,end) :返回(start,end)内的整数，即不包括两端<br>random.randint(start,end):随机返回[start,end]内的整数<br>random.uniform(start,end)：随机返回[strat,end]内的浮点数<br>random.choice(sequence)：随机返回sequence内的一个元素</p>
+<h3><span id="random">Random</span></h3><p>random.randrange(start,end) :返回(start,end)内的整数，即不包括两端<br>random.randint(start,end):随机返回[start,end]内的整数<br>random.uniform(start,end)：随机返回[strat,end]内的浮点数<br>random.choice(sequence)：随机返回sequence内的一个元素</p>
 
   </div>
 </article>
@@ -221,13 +221,13 @@ False
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-number">1.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“is”-和-“-”"><span class="toc-number">2.</span> <span class="toc-text">“is” 和 “==”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变类型与不可变类型"><span class="toc-number">3.</span> <span class="toc-text">可变类型与不可变类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#除法"><span class="toc-number">4.</span> <span class="toc-text">除法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Random"><span class="toc-number">5.</span> <span class="toc-text">Random</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">“is” 和 “==”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">可变类型与不可变类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">除法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">Random</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -273,7 +273,7 @@ False
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </nav>

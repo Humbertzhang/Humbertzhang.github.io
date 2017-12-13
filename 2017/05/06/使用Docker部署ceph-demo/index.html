@@ -22,7 +22,7 @@
 得到自己的IP与CDIRip -4 a
 
 1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt">
-<meta property="og:updated_time" content="2017-05-07T00:41:52.172Z">
+<meta property="og:updated_time" content="2017-12-11T12:13:36.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Docker部署ceph/demo">
 <meta name="twitter:description" content="环境：Ubuntu 16.04
@@ -74,7 +74,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </span>
@@ -112,7 +112,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Docker"><span class="toc-number">1.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用阿里云镜像加速器"><span class="toc-number">2.</span> <span class="toc-text">使用阿里云镜像加速器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到自己的IP与CDIR"><span class="toc-number">3.</span> <span class="toc-text">得到自己的IP与CDIR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载镜像"><span class="toc-number">4.</span> <span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#针对ext4修改配置"><span class="toc-number">5.</span> <span class="toc-text">针对ext4修改配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署ceph"><span class="toc-number">6.</span> <span class="toc-text">部署ceph</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">使用阿里云镜像加速器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">得到自己的IP与CDIR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">针对ext4修改配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">部署ceph</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -140,6 +140,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/">Docker</a>
+    </div>
+
 
     </div>
   </header>
@@ -147,9 +152,9 @@
 
   <div class="content" itemprop="articleBody">
     <p>环境：Ubuntu 16.04</p>
-<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-</code></pre><h2 id="使用阿里云镜像加速器"><a href="#使用阿里云镜像加速器" class="headerlink" title="使用阿里云镜像加速器"></a>使用阿里云镜像加速器</h2><p><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云镜像加速器</a><br>按照指导修改文件</p>
-<h2 id="得到自己的IP与CDIR"><a href="#得到自己的IP与CDIR" class="headerlink" title="得到自己的IP与CDIR"></a>得到自己的IP与CDIR</h2><pre><code>ip -4 a
+<h2><span id="安装docker">安装Docker</span></h2><pre><code>curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+</code></pre><h2><span id="使用阿里云镜像加速器">使用阿里云镜像加速器</span></h2><p><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云镜像加速器</a><br>按照指导修改文件</p>
+<h2><span id="得到自己的ip与cdir">得到自己的IP与CDIR</span></h2><pre><code>ip -4 a
 
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
     inet 127.0.0.1/8 scope host lo
@@ -161,13 +166,13 @@
     inet 172.17.0.1/16 scope global docker0
        valid_lft forever preferred_lft forever
 </code></pre><p>2中的10.135.186.15即为ip，10.135.186.15/18为对应CDIR</p>
-<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p>运行：</p>
+<h2><span id="下载镜像">下载镜像</span></h2><p>运行：</p>
 <pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/18 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
 </code></pre><p>下载ceph/demo</p>
-<h2 id="针对ext4修改配置"><a href="#针对ext4修改配置" class="headerlink" title="针对ext4修改配置"></a>针对ext4修改配置</h2><p>官方不建议采用ext4文件系统作为ceph的后端文件系统，如果采用，那么对于ext4的filesystem，应该在/etc/ceph/ceph.conf中添加如下配置：</p>
+<h2><span id="针对ext4修改配置">针对ext4修改配置</span></h2><p>官方不建议采用ext4文件系统作为ceph的后端文件系统，如果采用，那么对于ext4的filesystem，应该在/etc/ceph/ceph.conf中添加如下配置：</p>
 <pre><code>osd max object name len = 256
 osd max object namespace len = 64
-</code></pre><h2 id="部署ceph"><a href="#部署ceph" class="headerlink" title="部署ceph"></a>部署ceph</h2><p>仍然运行</p>
+</code></pre><h2><span id="部署ceph">部署ceph</span></h2><p>仍然运行</p>
 <pre><code>sudo docker run -d --net=host -v /etc/ceph:/etc/ceph -e MON_IP=10.135.186.15 -e CEPH_PUBLIC_NETWORK=10.135.186.15/21 ceph/demo d3e4ead6c0ba4606201f9f861bd960f4c6d9376d6686714664489540b2843ce0
 </code></pre><hr>
 <p>参考:</p>
@@ -196,13 +201,13 @@ osd max object namespace len = 64
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Docker"><span class="toc-number">1.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用阿里云镜像加速器"><span class="toc-number">2.</span> <span class="toc-text">使用阿里云镜像加速器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到自己的IP与CDIR"><span class="toc-number">3.</span> <span class="toc-text">得到自己的IP与CDIR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载镜像"><span class="toc-number">4.</span> <span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#针对ext4修改配置"><span class="toc-number">5.</span> <span class="toc-text">针对ext4修改配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署ceph"><span class="toc-number">6.</span> <span class="toc-text">部署ceph</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">使用阿里云镜像加速器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">得到自己的IP与CDIR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">针对ext4修改配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">部署ceph</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -248,7 +253,7 @@ osd max object namespace len = 64
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </nav>

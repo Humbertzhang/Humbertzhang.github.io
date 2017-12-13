@@ -6,18 +6,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="STL介绍STL的选取STL使用技巧STL的实现">
+    <meta name="description" content="STL介绍
+STL 六大组件
+常用容器与算法介绍
+常用容器
+常用算法
+
+
+示例程序
+
+
+STL的选取
+使用技巧
+Vector 减少不必要的重新分配
+不要直接修改set, multiset, map, multimap 的键
+排序
+
+
+STL的实现
+
+
+STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CPP STL介绍">
 <meta property="og:url" content="http://Humbertzhang.github.io/2017/12/11/CPP容器/index.html">
 <meta property="og:site_name" content="Humbert's Blog">
-<meta property="og:description" content="STL介绍STL的选取STL使用技巧STL的实现">
-<meta property="og:image" content="http://ohr9krjig.bkt.clouddn.com/stl">
-<meta property="og:updated_time" content="2017-12-11T07:26:52.016Z">
+<meta property="og:description" content="STL介绍
+STL 六大组件
+常用容器与算法介绍
+常用容器
+常用算法
+
+
+示例程序
+
+
+STL的选取
+使用技巧
+Vector 减少不必要的重新分配
+不要直接修改set, multiset, map, multimap 的键
+排序
+
+
+STL的实现
+
+
+STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸">
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\">
+<meta property="og:image" content="http://ohr9krjig.bkt.clouddn.com/stl.png">
+<meta property="og:updated_time" content="2017-12-13T08:50:36.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CPP STL介绍">
-<meta name="twitter:description" content="STL介绍STL的选取STL使用技巧STL的实现">
-<meta name="twitter:image" content="http://ohr9krjig.bkt.clouddn.com/stl">
+<meta name="twitter:description" content="STL介绍
+STL 六大组件
+常用容器与算法介绍
+常用容器
+常用算法
+
+
+示例程序
+
+
+STL的选取
+使用技巧
+Vector 减少不必要的重新分配
+不要直接修改set, multiset, map, multimap 的键
+排序
+
+
+STL的实现
+
+
+STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸">
+<meta name="twitter:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
     
     
         
@@ -61,7 +123,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </span>
@@ -97,7 +159,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#STL介绍"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL的选取"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL使用技巧"><span class="toc-number">3.</span> <span class="toc-text">STL使用技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL的实现"><span class="toc-number">4.</span> <span class="toc-text">STL的实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">STL 六大组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">常用容器与算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">常用容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">示例程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">Vector 减少不必要的重新分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">不要直接修改set, multiset, map, multimap 的键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">STL的实现</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -127,7 +189,7 @@
       
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/C/">C++</a>
+        <a class="tag-link" href="/tags/C/">C++</a>, <a class="tag-link" href="/tags/STL/">STL</a>
     </div>
 
 
@@ -136,8 +198,80 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="http://ohr9krjig.bkt.clouddn.com/stl" alt=""></p>
-<h2 id="STL介绍"><a href="#STL介绍" class="headerlink" title="STL介绍"></a>STL介绍</h2><h2 id="STL的选取"><a href="#STL的选取" class="headerlink" title="STL的选取"></a>STL的选取</h2><h2 id="STL使用技巧"><a href="#STL使用技巧" class="headerlink" title="STL使用技巧"></a>STL使用技巧</h2><h2 id="STL的实现"><a href="#STL的实现" class="headerlink" title="STL的实现"></a>STL的实现</h2>
+    <!-- toc -->
+<ul>
+<li><a href="#stl介绍">STL介绍</a><ul>
+<li><a href="#stl-六大组件">STL 六大组件</a></li>
+<li><a href="#常用容器与算法介绍">常用容器与算法介绍</a><ul>
+<li><a href="#常用容器">常用容器</a></li>
+<li><a href="#常用算法">常用算法</a></li>
+</ul>
+</li>
+<li><a href="#示例程序">示例程序</a></li>
+</ul>
+</li>
+<li><a href="#stl的选取">STL的选取</a></li>
+<li><a href="#使用技巧">使用技巧</a><ul>
+<li><a href="#vector-减少不必要的重新分配">Vector 减少不必要的重新分配</a></li>
+<li><a href="#不要直接修改set-multiset-map-multimap-的键">不要直接修改set, multiset, map, multimap 的键</a></li>
+<li><a href="#排序">排序</a></li>
+</ul>
+</li>
+<li><a href="#stl的实现">STL的实现</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="stl介绍">STL介绍</span></h2><p>STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。</p>
+<p>在C++标准中，STL被组织为下面的13个头文件： <code>&lt;algorithm&gt;</code>、<code>&lt;deque&gt;</code>、<code>&lt;functional&gt;</code>、<code>&lt;iterator&gt;</code>， <code>&lt;vector&gt;</code>， <code>&lt;list&gt;</code>、<code>&lt;map&gt;</code>、<code>&lt;memory&gt;</code>、<code>&lt;numeric&gt;</code>、<code>&lt;queue&gt;</code>、<code>&lt;set&gt;</code>、<code>&lt;stack&gt;</code>和<code>&lt;utility&gt;</code>。</p>
+<h3><span id="stl-六大组件">STL 六大组件</span></h3><p>有容器、迭代器、算法、仿函数、迭代适配器、空间配置器。<br>容器通过空间配置器取得数据存储空间；算法利用迭代器向容器存取数据；仿函数协助算法完成不同的策略；适配器可以用来修改容器、迭代器或仿函数的接口；</p>
+<p>主要需要我们关注的有：</p>
+<ul>
+<li>容器(Container): 是一种数据结构，如 list，vector，和deques ，以模板类的方法提供。</li>
+<li>迭代器（Iterator）: 提供了访问容器中对象的方法。例如，可以使用一对迭代器指定list或vector中的一定范围的对象。</li>
+<li>算法(Algorithm): 用来操作容器中的数据的模板函数。例如，STL用sort()来对一个vector中的数据进行排序，用find()来搜索一个list中的对象，函数本身与他们操作的数据的结构和类型无关，因此他们可以在从简单数组到高度复杂容器的任何数据结构上使用。 任何的一个STL算法，都需要获得由一对迭代器所标示的区间，用来表示操作范围。这一对迭代器所标示的区间都是前闭后开区间，例如<code>[first, last)</code>。也就是说实际上，整个区间是从first开始到last-1，迭代器last指的是最后一个元素的下一个位置。在STL中所有区间都是采用前闭后开，这样可以带来很多方便。</li>
+</ul>
+<h3><span id="常用容器与算法介绍">常用容器与算法介绍</span></h3><h4><span id="常用容器">常用容器</span></h4><p><code>&lt;vector&gt;</code><br>vector是一个能够存放任意类型的动态数组。当你不知道需要选取什么容器时就选它吧。vector在储存空间不足时会开辟一个原空间*2大小的空间，并将原数据拷贝到新的空间中。这个操作比较耗时，但是有办法可以弥补这个缺点，在下文会有。</p>
+<p><code>&lt;list&gt;</code><br>双向循环链表。不可以随机存储，但是在任何地方插入与删除元素的时间都是常量.</p>
+<p><code>&lt;queue&gt;</code><br>队列, 先进先出的数据结构.<br><img src="https://en.wikipedia.org/wiki/Queue_(abstract_data_type" alt="">#/media/File:Data_Queue.svg)</p>
+<p><code>&lt;deque&gt;</code><br>Deque是一个双向队列，既支持随机存取(像数组一样)，又支持两端的操作(在前后插入，在前后删除).</p>
+<p><code>&lt;priority_queue&gt;</code><br>优先队列，即堆。每次出队的元素为优先级最高的那一个。</p>
+<p><code>&lt;stack&gt;</code><br>栈， 后进先出的数据结构。<br><img src="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\" alt="">#/media/File:Lifo_stack.png)</p>
+<p><code>&lt;set&gt;</code><br>集合，每个值都是惟一的。</p>
+<p><code>&lt;multiset&gt;</code><br>多集，值可以重复，可以记录每个元素出现了多少次.</p>
+<p><code>&lt;map&gt;</code><br>键值对，键唯一，一个键对应一个值。</p>
+<p><code>&lt;multimap&gt;</code><br>键值对，键位移，一个键可对应多个值。</p>
+<h4><span id="常用算法">常用算法</span></h4><p>包含在<code>&lt;algorithm&gt;头文件中</code></p>
+<p><code>min(), max()</code></p>
+<p><code>sort()</code><br>排序算法，将指定区间中的数据排序。<br>如<code>sort(v.begin(), v.end())</code>会将v这个vector中的元素从小到大排列。</p>
+<p><code>reverse()</code><br>反转算法, 将指定区间中的数据反转。<br><code>reverse(s.begin(), s.end())</code> 会将s这个字符串反转。</p>
+<p><code>swap()</code></p>
+<p><code>fill()</code></p>
+<p><code>merge()</code></p>
+<p><code>unique()</code></p>
+<p><code>copy()</code></p>
+<p><code>replace()</code></p>
+<p><code>move()</code></p>
+<h3><span id="示例程序">示例程序</span></h3><h2><span id="stl的选取">STL的选取</span></h2><p><img src="http://ohr9krjig.bkt.clouddn.com/stl.png" alt=""></p>
+<h2><span id="使用技巧">使用技巧</span></h2><h3><span id="vector-减少不必要的重新分配">Vector 减少不必要的重新分配</span></h3><p>vector的扩张可以分为下面几个步骤:</p>
+<ul>
+<li>分配一块大小为当前容量2倍的空间。</li>
+<li>把容器的所有元素从旧的内存拷贝到新的内存中。</li>
+<li>析构掉旧内存中的对象。</li>
+<li>释放旧的内存。<br>这个过程是十分耗时的。</li>
+</ul>
+<p>在想一下，如果你这样创建一个包含1到1000的vector<int>, 你可能会这样做:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1000</span>; i++) &#123;</div><div class="line">    v.push_back(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></int></p>
+<p>在这个过程中，最坏情况下会有10次内存重新分配。（1000 约等于 2的10次方）.</p>
+<p>如何避免这种情况呢？<br>vector提供了一个reserve函数， 这个函数可以将容器的容量(capacity)强迫变为某个数值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">capacity:一个容器最大可以存放多少个元素，即size最大是多少。</div><div class="line">size:当前容器有多少元素。</div><div class="line">当vector在插入一个元素时，会比较size和capacity, 当两者一样大时，代表容量已经被用完，开始重新分配空间。</div></pre></td></tr></table></figure></p>
+<p>如果我们在一开始就将vector的capacity设置为某个足够大的数值，就不会出现多次重新分配的情况，也就提升了效率。<br>如，上述程序这样写就不会出现重新分配的情况了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vector&lt;int&gt; v;</div><div class="line">v.reserve(1000);</div><div class="line">for(int i = 0; i &lt;= 1000; i++) &#123;</div><div class="line">    v.push_back(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注：这条策略同样适用于string.</p>
+<h3><span id="不要直接修改set-multiset-map-multimap-的键">不要直接修改set, multiset, map, multimap 的键</span></h3><p>第22条</p>
+<h3><span id="排序">排序</span></h3><ul>
+<li>若需对vector, string, deque, 或 array容器进行全排序，你可选择sort或stable_sort；</li>
+<li>若只需对vector, string, deque, 或 array容器中取得top n的元素，部分排序partial_sort是首选.</li>
+<li>若对于vector, string, deque, 或array容器，你需要找到第n个位置的元素或者你需要得到top n且不关系top n中的内部顺序，nth_element是最理想的；</li>
+<li>若你需要从标准序列容器或者array中把满足某个条件或者不满足某个条件的元素分开，你最好使用partition或stable_partition；</li>
+<li>若使用的list容器，你可以直接使用partition和stable_partition算法，你可以使用list::sort代替sort和stable_sort排序。若你需要得到partial_sort或nth_element的排序效果，你必须间接使用。正如上面介绍的有几种方式可以选择。</li>
+</ul>
+<h2><span id="stl的实现">STL的实现</span></h2>
   </div>
 </article>
 
@@ -157,13 +291,13 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#STL介绍"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL的选取"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL使用技巧"><span class="toc-number">3.</span> <span class="toc-text">STL使用技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL的实现"><span class="toc-number">4.</span> <span class="toc-text">STL的实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">STL 六大组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">常用容器与算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">常用容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">示例程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">Vector 减少不必要的重新分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">不要直接修改set, multiset, map, multimap 的键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">STL的实现</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -209,7 +343,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </nav>

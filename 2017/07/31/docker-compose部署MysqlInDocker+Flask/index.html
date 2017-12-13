@@ -18,7 +18,7 @@ Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
 Step1拉取docker mysql镜像docker run --detach --name=test-mysql --env=&amp;quot;MYSQL_ROOT_PASSWORD=mypassword&amp;quot; mysql
 
 Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
-<meta property="og:updated_time" content="2017-08-12T13:39:36.231Z">
+<meta property="og:updated_time" content="2017-12-11T12:13:06.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Mysql_In_Docker为docker部署的Flask提供数据库支持">
 <meta name="twitter:description" content="目的：使用Docker部署的mysql来为flask提供数据支持
@@ -68,7 +68,7 @@ Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </span>
@@ -106,7 +106,7 @@ Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的：使用Docker部署的mysql来为flask提供数据支持"><span class="toc-number">1.</span> <span class="toc-text">目的：使用Docker部署的mysql来为flask提供数据支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1"><span class="toc-number">2.</span> <span class="toc-text">Step1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#拉取docker-mysql镜像"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">拉取docker mysql镜像</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2"><span class="toc-number">3.</span> <span class="toc-text">Step2</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#获取docker-mysql的内网地址"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">获取docker-mysql的内网地址　</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3"><span class="toc-number">4.</span> <span class="toc-text">Step3</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#修改docker-compose-yml"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">修改docker-compose.yml</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step4"><span class="toc-number">5.</span> <span class="toc-text">Step4</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#部署flask与数据库初始化"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">部署flask与数据库初始化</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">目的：使用Docker部署的mysql来为flask提供数据支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">Step1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">拉取docker mysql镜像</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">Step2</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">获取docker-mysql的内网地址　</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">Step3</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">修改docker-compose.yml</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">Step4</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">部署flask与数据库初始化</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -134,16 +134,21 @@ Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/">Docker</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="目的：使用Docker部署的mysql来为flask提供数据支持"><a href="#目的：使用Docker部署的mysql来为flask提供数据支持" class="headerlink" title="目的：使用Docker部署的mysql来为flask提供数据支持"></a>目的：使用Docker部署的mysql来为flask提供数据支持</h2><hr>
-<h2 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h2><h5 id="拉取docker-mysql镜像"><a href="#拉取docker-mysql镜像" class="headerlink" title="拉取docker mysql镜像"></a>拉取docker mysql镜像</h5><pre><code>docker run --detach --name=test-mysql --env=&quot;MYSQL_ROOT_PASSWORD=mypassword&quot; mysql
+    <h2><span id="目的使用docker部署的mysql来为flask提供数据支持">目的：使用Docker部署的mysql来为flask提供数据支持</span></h2><hr>
+<h2><span id="step1">Step1</span></h2><h5><span id="拉取docker-mysql镜像">拉取docker mysql镜像</span></h5><pre><code>docker run --detach --name=test-mysql --env=&quot;MYSQL_ROOT_PASSWORD=mypassword&quot; mysql
 </code></pre><hr>
-<h2 id="Step2"><a href="#Step2" class="headerlink" title="Step2"></a>Step2</h2><h5 id="获取docker-mysql的内网地址"><a href="#获取docker-mysql的内网地址" class="headerlink" title="获取docker-mysql的内网地址　"></a>获取docker-mysql的内网地址　</h5><pre><code>docker inspect test-mysql | grep IPAddress
+<h2><span id="step2">Step2</span></h2><h5><span id="获取docker-mysql的内网地址">获取docker-mysql的内网地址　</span></h5><pre><code>docker inspect test-mysql | grep IPAddress
 </code></pre><p>我得到的IPAddress为<code>172.17.0.20</code></p>
 <p>使用本地的mysql在其中加入新数据库,其中-h 后对应的即为上面的IPAdress ,-P对应mysql的默认端口3306.</p>
 <pre><code>mysql -uroot -pmypassword -h 172.17.0.20 -P 3306
@@ -151,11 +156,11 @@ Step2获取docker-mysql的内网地址　docker inspect test-mysql |">
 <pre><code>CREATE DATABASE TEST
 </code></pre><p>加完后，添加config.py中相应的.env文件，<br>    MYSQL_URI=mysql://root:mypassword@mysql:3306/TEST</p>
 <hr>
-<h2 id="Step3"><a href="#Step3" class="headerlink" title="Step3"></a>Step3</h2><h5 id="修改docker-compose-yml"><a href="#修改docker-compose-yml" class="headerlink" title="修改docker-compose.yml"></a>修改docker-compose.yml</h5><p>使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</p>
+<h2><span id="step3">Step3</span></h2><h5><span id="修改docker-composeyml">修改docker-compose.yml</span></h5><p>使用docker ps得到test-mysql的容器ID,根据容器的ID在docker-compose.yml中flask对应的容器中添加</p>
 <pre><code>external_links: 
         - CONTAINER_ID:mysql
 </code></pre><hr>
-<h2 id="Step4"><a href="#Step4" class="headerlink" title="Step4"></a>Step4</h2><h5 id="部署flask与数据库初始化"><a href="#部署flask与数据库初始化" class="headerlink" title="部署flask与数据库初始化"></a>部署flask与数据库初始化</h5><p>之后使用</p>
+<h2><span id="step4">Step4</span></h2><h5><span id="部署flask与数据库初始化">部署flask与数据库初始化</span></h5><p>之后使用</p>
 <pre><code>docker-compose build
 docker-compose up &amp;
 </code></pre><p>来将项目部署起来</p>
@@ -194,13 +199,13 @@ $ docker exec &lt;container id&gt; python manage.py test
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的：使用Docker部署的mysql来为flask提供数据支持"><span class="toc-number">1.</span> <span class="toc-text">目的：使用Docker部署的mysql来为flask提供数据支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1"><span class="toc-number">2.</span> <span class="toc-text">Step1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#拉取docker-mysql镜像"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">拉取docker mysql镜像</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2"><span class="toc-number">3.</span> <span class="toc-text">Step2</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#获取docker-mysql的内网地址"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">获取docker-mysql的内网地址　</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3"><span class="toc-number">4.</span> <span class="toc-text">Step3</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#修改docker-compose-yml"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">修改docker-compose.yml</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step4"><span class="toc-number">5.</span> <span class="toc-text">Step4</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#部署flask与数据库初始化"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">部署flask与数据库初始化</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">目的：使用Docker部署的mysql来为flask提供数据支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">Step1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">拉取docker mysql镜像</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">Step2</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">获取docker-mysql的内网地址　</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">Step3</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">修改docker-compose.yml</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">Step4</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">部署flask与数据库初始化</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -246,7 +251,7 @@ $ docker exec &lt;container id&gt; python manage.py test
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </nav>

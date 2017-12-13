@@ -70,7 +70,7 @@ git clone https://github.com/Humber">
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </span>
@@ -108,7 +108,7 @@ git clone https://github.com/Humber">
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#用途"><span class="toc-number">1.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方法"><span class="toc-number">3.</span> <span class="toc-text">实现方法</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">实现方法</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -142,9 +142,9 @@ git clone https://github.com/Humber">
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．</p>
+    <h3><span id="用途">用途</span></h3><p>最近在写桂声测试的时候，发现对于Flask api的测试是有很多套路的，可以写一个东西来自动地将那些套路的东西填上，然后再由我们自己对那些非套路的东西人工修改，这样以来写测试的效率就会提高很多．</p>
 <hr>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:</p>
+<h3><span id="使用方法">使用方法</span></h3><p>现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:</p>
 <pre><code>git clone https://github.com/Humbertzhang/Judgement.git
 </code></pre><p>克隆下来后仓库的结构是这样的：</p>
 <pre><code>.
@@ -159,7 +159,7 @@ git clone https://github.com/Humber">
     └── uploadtime.py
 </code></pre><p>其中<code>test_apis</code>文件夹是用来测试使用的，例如下图：<br><a href="https://cuntuku.com/image/44PCc" target="_blank" rel="external"><img src="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif" alt="judge_demo.gif"></a><br>在实际使用中输入的API Floder Address为我们的api存放的文件夹．接着judgement便会自动地在其所在的文件夹为我们生成API的测试，存放在自动生成的testByJudgement文件夹里．<br>judgement使用就是这样,肯定还有很多不足和可以改进的地方，欢迎 issue 和 pr.</p>
 <hr>
-<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>主要便是调用了文件读写的api．<br>读取api文件夹中每个文件，然后对每一行进行检查，如果该行中有@api.route()字样便识别为一个api的开始，然后跳过接下来带有＂＠＂，＂＃＂的行和空行，读取其api名字与方法，根据不同的方法来file.writelines不同的内容．</p>
+<h3><span id="实现方法">实现方法</span></h3><p>主要便是调用了文件读写的api．<br>读取api文件夹中每个文件，然后对每一行进行检查，如果该行中有@api.route()字样便识别为一个api的开始，然后跳过接下来带有＂＠＂，＂＃＂的行和空行，读取其api名字与方法，根据不同的方法来file.writelines不同的内容．</p>
 
   </div>
 </article>
@@ -180,13 +180,13 @@ git clone https://github.com/Humber">
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#用途"><span class="toc-number">1.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方法"><span class="toc-number">3.</span> <span class="toc-text">实现方法</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">实现方法</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -232,7 +232,7 @@ git clone https://github.com/Humber">
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/probberechts">Projects</a></li>
+          <li><a href="http://github.com/humbertzhang">Projects</a></li>
         
       </ul>
     </nav>
