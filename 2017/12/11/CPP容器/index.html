@@ -1,239 +1,204 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="STL介绍
-STL 六大组件
-常用容器与算法介绍
-常用容器
-常用算法
-
-
-示例程序
-
-
-STL的选取
-使用技巧
-用empty()而非size()来检查容器是否为空
-当在容器中存放指针时，注意在销毁容器前先销毁指针
-删除
-Vector 减少不必要的重新分配
-当对效率敏感时，应注意map.insert 与 map::operator[]
-排序
-容器的成员函数优先于算法
-
-
-
-
-STL介绍STL(S">
+  <meta charset="utf-8">
+  
+  <title>CPP STL介绍 | Humbert&#39;s Blog | 欲变世界，先变自身</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="C++,STL">
+  <meta name="description" content="STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。
+在C++标准中，STL被组织为下面的13个头文件： &amp;lt;algorithm&amp;gt;、&amp;lt;deque&amp;gt;、&amp;lt;fu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CPP STL介绍">
 <meta property="og:url" content="http://Humbertzhang.github.io/2017/12/11/CPP容器/index.html">
 <meta property="og:site_name" content="Humbert's Blog">
-<meta property="og:description" content="STL介绍
-STL 六大组件
-常用容器与算法介绍
-常用容器
-常用算法
-
-
-示例程序
-
-
-STL的选取
-使用技巧
-用empty()而非size()来检查容器是否为空
-当在容器中存放指针时，注意在销毁容器前先销毁指针
-删除
-Vector 减少不必要的重新分配
-当对效率敏感时，应注意map.insert 与 map::operator[]
-排序
-容器的成员函数优先于算法
-
-
-
-
-STL介绍STL(S">
+<meta property="og:description" content="STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。
+在C++标准中，STL被组织为下面的13个头文件： &amp;lt;algorithm&amp;gt;、&amp;lt;deque&amp;gt;、&amp;lt;fu">
 <meta property="og:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
 <meta property="og:image" content="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\">
 <meta property="og:image" content="https://i.stack.imgur.com/kQnCS.png">
 <meta property="og:image" content="http://ohr9krjig.bkt.clouddn.com/remove.png">
-<meta property="og:updated_time" content="2017-12-15T09:12:57.701Z">
+<meta property="og:updated_time" content="2017-12-22T05:24:09.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CPP STL介绍">
-<meta name="twitter:description" content="STL介绍
-STL 六大组件
-常用容器与算法介绍
-常用容器
-常用算法
-
-
-示例程序
-
-
-STL的选取
-使用技巧
-用empty()而非size()来检查容器是否为空
-当在容器中存放指针时，注意在销毁容器前先销毁指针
-删除
-Vector 减少不必要的重新分配
-当对效率敏感时，应注意map.insert 与 map::operator[]
-排序
-容器的成员函数优先于算法
-
-
-
-
-STL介绍STL(S">
+<meta name="twitter:description" content="STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。
+在C++标准中，STL被组织为下面的13个头文件： &amp;lt;algorithm&amp;gt;、&amp;lt;deque&amp;gt;、&amp;lt;fu">
 <meta name="twitter:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>CPP STL介绍</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- rss -->
-    
-    
+  
+    <link rel="alternative" href="/atom.xml" title="Humbert&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="一条咸鱼">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="http://github.com/humbertzhang">Projects</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        
-        <li><a class="icon" href="/2017/10/02/CSAPP第十章笔记-系统级I-O/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://Humbertzhang.github.io/2017/12/11/CPP容器/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&text=CPP STL介绍"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&is_video=false&description=CPP STL介绍"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CPP STL介绍&body=Check out this article: http://Humbertzhang.github.io/2017/12/11/CPP容器/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&name=CPP STL介绍&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
+  <div id="loading" class="active"></div>
 
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="http://ohr9krjig.bkt.clouddn.com/xiong.png"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Humbert Zhang</h5>
+        <a href="mailto:504490160@qq.com" title="504490160@qq.com" class="mail">504490160@qq.com</a>
+      </hgroup>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">STL 六大组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">常用容器与算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">常用容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">示例程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">用empty()而非size()来检查容器是否为空</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">当在容器中存放指针时，注意在销毁容器前先销毁指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.4.</span> <span class="toc-text">Vector 减少不必要的重新分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.5.</span> <span class="toc-text">当对效率敏感时，应注意map.insert 与 map::operator[]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.6.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.7.</span> <span class="toc-text">容器的成员函数优先于算法</span></a></li></ol></li></ol>
-    </div>
-  </span>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/humbertzhang" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Humbert&#39;s Blog &copy; 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
 </div>
 
-    
-    <div class="content index width mx-auto px2 my4">
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CPP STL介绍</div>
         
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        CPP STL介绍
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Humbert's Blog</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2017-12-11T06:53:36.000Z" itemprop="datePublished">2017-12-11</time>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">CPP STL介绍</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2017-12-11T06:53:36.000Z" itemprop="datePublished" class="page-time">
+  2017-12-11
+</time>
 
 
-      
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/C/">C++</a>, <a class="tag-link" href="/tags/STL/">STL</a>
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-CPP容器" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li></ul>
+
     </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
 
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
 
-    </div>
-  </header>
-  
+            
 
-  <div class="content" itemprop="articleBody">
-    <!-- toc -->
-<ul>
-<li><a href="#stl介绍">STL介绍</a><ul>
-<li><a href="#stl-六大组件">STL 六大组件</a></li>
-<li><a href="#常用容器与算法介绍">常用容器与算法介绍</a><ul>
-<li><a href="#常用容器">常用容器</a></li>
-<li><a href="#常用算法">常用算法</a></li>
-</ul>
-</li>
-<li><a href="#示例程序">示例程序</a></li>
-</ul>
-</li>
-<li><a href="#stl的选取">STL的选取</a></li>
-<li><a href="#使用技巧">使用技巧</a><ul>
-<li><a href="#用empty而非size来检查容器是否为空">用empty()而非size()来检查容器是否为空</a></li>
-<li><a href="#当在容器中存放指针时注意在销毁容器前先销毁指针">当在容器中存放指针时，注意在销毁容器前先销毁指针</a></li>
-<li><a href="#删除">删除</a></li>
-<li><a href="#vector-减少不必要的重新分配">Vector 减少不必要的重新分配</a></li>
-<li><a href="#当对效率敏感时应注意mapinsert-与-mapoperator">当对效率敏感时，应注意map.insert 与 map::operator[]</a></li>
-<li><a href="#排序">排序</a></li>
-<li><a href="#容器的成员函数优先于算法">容器的成员函数优先于算法</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-<h2><span id="stl介绍">STL介绍</span></h2><p>STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。</p>
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">STL介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">STL 六大组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">常用容器与算法介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">常用容器</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">常用算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">示例程序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">STL的选取</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用技巧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">用empty()而非size()来检查容器是否为空</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">当在容器中存放指针时，注意在销毁容器前先销毁指针</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Vector 减少不必要的重新分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">当对效率敏感时，应注意map.insert 与 map::operator[]</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">容器的成员函数优先于算法</span></a></li></ol></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h2><span id="stl介绍">STL介绍</span></h2><p>STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。</p>
 <p>在C++标准中，STL被组织为下面的13个头文件： <code>&lt;algorithm&gt;</code>、<code>&lt;deque&gt;</code>、<code>&lt;functional&gt;</code>、<code>&lt;iterator&gt;</code>， <code>&lt;vector&gt;</code>， <code>&lt;list&gt;</code>、<code>&lt;map&gt;</code>、<code>&lt;memory&gt;</code>、<code>&lt;numeric&gt;</code>、<code>&lt;queue&gt;</code>、<code>&lt;set&gt;</code>、<code>&lt;stack&gt;</code>和<code>&lt;utility&gt;</code>。</p>
 <h3><span id="stl-六大组件">STL 六大组件</span></h3><p>有容器、迭代器、算法、仿函数、迭代适配器、空间配置器。<br>容器通过空间配置器取得数据存储空间；算法利用迭代器向容器存取数据；仿函数协助算法完成不同的策略；适配器可以用来修改容器、迭代器或仿函数的接口；</p>
 <p>主要需要我们关注的有：</p>
@@ -248,8 +213,8 @@ STL介绍STL(S">
 <p><code>&lt;deque&gt;</code><br>Deque是一个双向队列，既支持随机存取(像数组一样)，又支持两端的操作(在前后插入，在前后删除).</p>
 <p><code>&lt;priority_queue&gt;</code><br>优先队列，即堆。每次出队的元素为优先级最高的那一个。</p>
 <p><code>&lt;stack&gt;</code><br>栈， 后进先出的数据结构。<br><img src="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\" alt="">#/media/File:Lifo_stack.png)</p>
-<p><code>&lt;set&gt;</code><br>集合，每个值都是惟一的。</p>
-<p><code>&lt;multiset&gt;</code><br>多集，值可以重复，可以记录每个元素出现了多少次.</p>
+<p><code>&lt;set&gt;</code><br>set, multiset, map, multimap底层都是使用<a href="https://sakurawood.github.io/2017/06/25/%E7%BA%A2%E9%BB%91%E6%A0%91/" target="_blank" rel="external">红黑树</a>实现的。<br>集合，每个值都是惟一的。</p>
+<p><code>&lt;multiset&gt;</code><br>多集，值可以重复，可以记录每个元素出现了多少次。</p>
 <p><code>&lt;map&gt;</code><br>键值对，键唯一，一个键对应一个值。</p>
 <p><code>&lt;multimap&gt;</code><br>键值对，键位移，一个键可对应多个值。</p>
 <h4><span id="常用算法">常用算法</span></h4><p>包含在<code>&lt;algorithm&gt;头文件中</code></p>
@@ -328,108 +293,150 @@ STL介绍STL(S">
 <hr>
 <p><strong>推荐查询函数用法的网站 -&gt; <a href="http://www.cplusplus.com/reference/" target="_blank" rel="external">Cplusplus reference</a></strong></p>
 
-  </div>
-</article>
 
-
-
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://Humbertzhang.github.io/2017/12/11/CPP容器/" target="_blank" rel="external">http://Humbertzhang.github.io/2017/12/11/CPP容器/</a>
+                </p>
+                <footer><cite><a href="http://Humbertzhang.github.io">@Humbert's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2017/12/20/CSAPP信息的表示与处理/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CSAPP信息的表示与处理</h4>
+      </a>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
+  
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="http://github.com/humbertzhang">Projects</a></li>
-        
-      </ul>
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2017/10/02/CSAPP第十章笔记-系统级I-O/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CSAPP:系统级I/O</h4>
+      </a>
     </div>
+  
+</nav>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">STL介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">STL 六大组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">常用容器与算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">常用容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">示例程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">STL的选取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">用empty()而非size()来检查容器是否为空</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">当在容器中存放指针时，注意在销毁容器前先销毁指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.4.</span> <span class="toc-text">Vector 减少不必要的重新分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.5.</span> <span class="toc-text">当对效率敏感时，应注意map.insert 与 map::operator[]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.6.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.7.</span> <span class="toc-text">容器的成员函数优先于算法</span></a></li></ol></li></ol>
-    </div>
 
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://Humbertzhang.github.io/2017/12/11/CPP容器/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&text=CPP STL介绍"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&is_video=false&description=CPP STL介绍"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CPP STL介绍&body=Check out this article: http://Humbertzhang.github.io/2017/12/11/CPP容器/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&title=CPP STL介绍"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://Humbertzhang.github.io/2017/12/11/CPP容器/&name=CPP STL介绍&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-      <ul>
-        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
-        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
-        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
-        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
-      </ul>
-    </div>
-
-  </div>
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CPP容器" data-title="CPP STL介绍" data-url="http://Humbertzhang.github.io/2017/12/11/CPP容器/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ysblog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 </div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2017 Humbert Zhang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="http://github.com/humbertzhang">Projects</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+
+
+
+        </div>
+    </div>
+</article>
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "CPP STL介绍",
+    pic: "http://ohr9krjig.bkt.clouddn.com/xiong.png",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://Humbertzhang.github.io/2017/12/11/CPP容器/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-86660611-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-
-<!-- Disqus Comments -->
-
-

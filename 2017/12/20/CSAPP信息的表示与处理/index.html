@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSAPP信息的表示与处理 | Humbert&#39;s Blog | 欲变世界，先变自身</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="CSAPP,CS基础">
+  <meta name="description" content="信息存储字数据大小为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。如int32_t, int64_t, uint32_t, uint64_t等.
+寻址和字节顺序假设一个程序中的对象由w位的数字来表示，且w是8的倍数(一个Byte是8个bit),那么就把它从最高位到最低位每8个划成一个字节。在存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP信息的表示与处理">
+<meta property="og:url" content="http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/index.html">
+<meta property="og:site_name" content="Humbert's Blog">
+<meta property="og:description" content="信息存储字数据大小为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。如int32_t, int64_t, uint32_t, uint64_t等.
+寻址和字节顺序假设一个程序中的对象由w位的数字来表示，且w是8的倍数(一个Byte是8个bit),那么就把它从最高位到最低位每8个划成一个字节。在存储">
+<meta property="og:image" content="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg">
+<meta property="og:updated_time" content="2017-12-22T05:24:19.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP信息的表示与处理">
+<meta name="twitter:description" content="信息存储字数据大小为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。如int32_t, int64_t, uint32_t, uint64_t等.
+寻址和字节顺序假设一个程序中的对象由w位的数字来表示，且w是8的倍数(一个Byte是8个bit),那么就把它从最高位到最低位每8个划成一个字节。在存储">
+<meta name="twitter:image" content="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Humbert&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="一条咸鱼">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="http://ohr9krjig.bkt.clouddn.com/xiong.png"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Humbert Zhang</h5>
+        <a href="mailto:504490160@qq.com" title="504490160@qq.com" class="mail">504490160@qq.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/humbertzhang" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Humbert&#39;s Blog &copy; 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CSAPP信息的表示与处理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">CSAPP信息的表示与处理</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2017-12-20T06:15:47.000Z" itemprop="datePublished" class="page-time">
+  2017-12-20
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-CSAPP信息的表示与处理" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSAPP/">CSAPP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS基础/">CS基础</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息存储</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">字数据大小</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">寻址和字节顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">二进制代码迁移性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">位级运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">逻辑运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">移位运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">整数表示</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">无符号数编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">有符号数的补码编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">有符号数和无符号数的之间的转换</span></a></li></ol></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1><span id="信息存储">信息存储</span></h1><h2><span id="字数据大小">字数据大小</span></h2><p>为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。<br>如<code>int32_t</code>, <code>int64_t</code>, <code>uint32_t</code>, <code>uint64_t</code>等.</p>
+<h2><span id="寻址和字节顺序">寻址和字节顺序</span></h2><p>假设一个程序中的对象由w位的数字来表示，且w是8的倍数(一个Byte是8个bit),那么就把它从最高位到最低位每8个划成一个字节。<br>在存储时，有的机器采用从最低有效位到最高有效位来存储(小端法)，有的则相反(大端法),这两种方法没有性能上的差别，只是方式不同。<br>Linux 与 Windows都使用小端法来储存数据。</p>
+<h2><span id="二进制代码迁移性">二进制代码迁移性</span></h2><p>将一段程序经过编译后可以发现，在不同的机器上会得到不同的二进制代码，因为不同的操作系统对指令的编码规则是不一样的，因此二进制编码很难在不同的操作系统上兼容。</p>
+<h2><span id="位级运算">位级运算</span></h2><p>与、或、非、异或被成为位(bit)级运算.<br>确定一个位级运算的结果的最好方法就是将其转化为二进制数，进行计算后再转化回来。<br>一个利用异或特性来实现inplace_swap的算法如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">inplace_swap</span><span class="params">(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span></span>&#123;</div><div class="line">    *y = *x ^ *y;</div><div class="line">    *x = *x ^ *y;   <span class="comment">//*x = *x ^ *x ^ *y = *y</span></div><div class="line">    *y = *x ^ *y;   <span class="comment">//*y = *y ^ *x ^ *y = *x</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不过这种方式并没有性能上的优势。</p>
+<h2><span id="逻辑运算">逻辑运算</span></h2><p>在逻辑运算中，所有非0的参数表示<code>True</code>, 0表示<code>False</code>.<br>并且，如果对一个参数求值，如<br><code>if(A || B)</code>, 如果只运算A就可以得到确定的结果，那么B就不会被运算。<br>因此我认为在写程序时要注意，最好不要将对程序结果有影响的式子放在逻辑运算中。</p>
+<h2><span id="移位运算">移位运算</span></h2><p>左移：在右端补0<br>逻辑右移：在左端补0<br>算数右移：在左端补最高有效位的值。对有符号整数的运算很实用。<br>对绝大多数编译器，对有符号数进行算数右移，对无符号数进行逻辑右移。</p>
+<h1><span id="整数表示">整数表示</span></h1><h2><span id="无符号数编码">无符号数编码</span></h2><p>可以用向量的思想来理解，每一位都是一个长度为2^i次方的向量，则无符号数字的值即为每一位向量的和。<br><img src="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg" alt=""></p>
+<h2><span id="有符号数的补码编码">有符号数的补码编码</span></h2><p>对于一个w位的向量 x = <code>[Xw-1, Xw-2, Xw-3 ... X0]</code>, 第一位为符号位，权重为<code>(-2^w-1)</code>，而这个值足够大到加上之后的所有正数还是负数。因此符号位为1时，值为负，为0时，值为正。</p>
+<p>则最小数为：<code>-2^w-1</code>, 即为只有第一位为1的，其他都为0的情况。<br>最大数为:[01111…]情况，此时为<code>2^w-2 + 2^w-3 + ... + 2^0</code>, 即为<code>2^w-1-1</code><br>因此Min = -(Max+1), 且UnsignedMax = <code>2*MaX + 1</code> </p>
+<h2><span id="有符号数和无符号数的之间的转换">有符号数和无符号数的之间的转换</span></h2>
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/" target="_blank" rel="external">http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/</a>
+                </p>
+                <footer><cite><a href="http://Humbertzhang.github.io">@Humbert's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2017/12/11/CPP容器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CPP STL介绍</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CSAPP信息的表示与处理" data-title="CSAPP信息的表示与处理" data-url="http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ysblog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "CSAPP信息的表示与处理",
+    pic: "http://ohr9krjig.bkt.clouddn.com/xiong.png",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
