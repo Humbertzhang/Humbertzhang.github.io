@@ -277,13 +277,32 @@
 <li>文件表(file table)<br>所有进程共用一个文件表,它表示所有打开的文件的集合.它包括的列有文件位置，引用计数,以及一个指向v-node表中对应表项的指针.内核会在一个表项的引用计数为0时删除一个表项.</li>
 <li>v-node 表<br>同为所有进程共用一张表，每个表项包括st_mode, st_size等stat结构中的大多数信息.<br>不同于inode, inode只是表示文件位置.</li>
 </ul>
-<p><img src="https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/21/img/fs-tty-fd.png" alt="三个表之间的图示"><br>注1:tty可以理解为一个交互环境，如终端.<br>注2:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/21/img/fs-tty-fd.png" alt="三个表之间的图示" title="">
+                </div>
+                <div class="image-caption">三个表之间的图示</div>
+            </figure>
+<p>注1:tty可以理解为一个交互环境，如终端.<br>注2:</p>
 <blockquote>
 <p>On Linux, the set of file descriptors open in a process can be<br>accessed under the path /proc/PID/fd/, where PID is the process<br>identifier.</p>
 </blockquote>
-<h3><span id="父子进程如何共享打开文件列表">父子进程如何共享打开文件列表</span></h3><p>调用fork()前只有父进程表指向文件表的指针,调用fork后子进程增加了对于文件表中相应文件的引用次数.而从file table到vnode table的引用是不受影响的.<br><img src="http://www.programering.com/images/remote/ZnJvbT1jbmJsb2dzJnVybD13WnVCbkx6WW1ZeWdEWjRBRE94QXpNbUJUTTRnVE56UWpNMk1qTXpZMk16UXpNemdUTHlFRE54QWpNM0F6THhBRE54QWpNdlVqTTRnak4wOHladnhtWXYwMmJqNXladnhtWTBsbWJqNXljbGRXWXRsMkx2b0RjMFJIYQ.jpg" alt=""></p>
+<h3><span id="父子进程如何共享打开文件列表">父子进程如何共享打开文件列表</span></h3><p>调用fork()前只有父进程表指向文件表的指针,调用fork后子进程增加了对于文件表中相应文件的引用次数.而从file table到vnode table的引用是不受影响的.<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://www.programering.com/images/remote/ZnJvbT1jbmJsb2dzJnVybD13WnVCbkx6WW1ZeWdEWjRBRE94QXpNbUJUTTRnVE56UWpNMk1qTXpZMk16UXpNemdUTHlFRE54QWpNM0F6THhBRE54QWpNdlVqTTRnak4wOHladnhtWXYwMmJqNXladnhtWTBsbWJqNXljbGRXWXRsMkx2b0RjMFJIYQ.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h2><span id="io重定向">I/O重定向</span></h2><p>在shell中，可用 <code>&gt;</code> 符号来重定向输出到文件.<br>另一种方式是使用dup2函数<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>;</div><div class="line"></div><div class="line">成功返回非负描述符, 出错返回<span class="number">-1.</span></div><div class="line"></div><div class="line">dup2()函数复制该进程的描述符表中的oldfd的表项到newfd表项.覆盖newfd之前的内容.</div><div class="line">如果newfd已经打开了,dup2()会在复制oldfd之前关闭newfd.</div></pre></td></tr></table></figure></p>
-<p>.<br><img src="http://www.programering.com/images/remote/ZnJvbT1jc2RuJnVybD1RM2NoVkVhMFYzYlQ5U2UwbG1kaEozWnZBek52VW1kczkyY3psR1p2MFRQQjEwUUd0V1VDcEVNSjlDYnNsbVp2QURNMDhTWjZsMmMwNTJibTlDVnl3VU5NWlRZMThDZHU5bVp2MFRQQjlFTnJSbFQwRWthTmhYUVVSbWRSaGxXMVZUYWl0bVR6a1ZkakpqWXpwa01NWjNiRU5HTVNoVVl2UUhlbFIzTHk4eWF5RldieVZHZGhkM1B5WURNNFVqTXhBVE15RWpNeE1UTXdJekwwVm1idTRHWnpObUxuOUdiaTV5WnRsMkx2b0RjMFJIYQ.jpg" alt=""><br>如图,dup(4,1)会将标准输出(fd = 1)重定向到(fd = 4),即指向fileB.<br>之后fileA将会被关闭, file table到v-node table的引用会被删除, v-node table中对应项也会被释放.</p>
+<p>.<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://www.programering.com/images/remote/ZnJvbT1jc2RuJnVybD1RM2NoVkVhMFYzYlQ5U2UwbG1kaEozWnZBek52VW1kczkyY3psR1p2MFRQQjEwUUd0V1VDcEVNSjlDYnNsbVp2QURNMDhTWjZsMmMwNTJibTlDVnl3VU5NWlRZMThDZHU5bVp2MFRQQjlFTnJSbFQwRWthTmhYUVVSbWRSaGxXMVZUYWl0bVR6a1ZkakpqWXpwa01NWjNiRU5HTVNoVVl2UUhlbFIzTHk4eWF5RldieVZHZGhkM1B5WURNNFVqTXhBVE15RWpNeE1UTXdJekwwVm1idTRHWnpObUxuOUdiaTV5WnRsMkx2b0RjMFJIYQ.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>如图,dup(4,1)会将标准输出(fd = 1)重定向到(fd = 4),即指向fileB.<br>之后fileA将会被关闭, file table到v-node table的引用会被删除, v-node table中对应项也会被释放.</p>
 <h2><span id="标准iostdioh">标准I/O(＜stdio.h＞)</span></h2><p>包括:</p>
 <ul>
 <li>打开关闭文件的函数:fopen(), fclose()</li>
@@ -293,7 +312,13 @@
 </li>
 </ul>
 <p>FILE类型的流是对文件描述符和流缓冲区<strong>(</strong>使开销较大的Linux I/O函数调用次数尽可能小<strong>)</strong>的抽象．</p>
-<h2><span id="使用io函数的建议与限制">使用I/O函数的建议与限制</span></h2><p>本章讨论的所有I/O函数如下:<br><img src="http://pic2.zhimg.com/50/v2-61b934c2a0efe443dcd91370b8ab48e1_r.jpg" alt=""><br>可以看出标准I/O函数与RIO函数都是基于Unix I/O函数来实现的.</p>
+<h2><span id="使用io函数的建议与限制">使用I/O函数的建议与限制</span></h2><p>本章讨论的所有I/O函数如下:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://pic2.zhimg.com/50/v2-61b934c2a0efe443dcd91370b8ab48e1_r.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>可以看出标准I/O函数与RIO函数都是基于Unix I/O函数来实现的.</p>
 <h3><span id="使用io函数的基本指导与建议">使用I/O函数的基本指导与建议:</span></h3><ul>
 <li>只要有可能就使用标准I/O．<br>对于磁盘与终端设备I/O来说, 标准I/O是首选.</li>
 <li>不要使用scanf或rio_readlineb来读取二进制文件.<br>因为二进制文件中可能有0xa字节，而他们在读取文本文件的函数中代表换行，但是在读取二进制文件过程中就会导致错误.</li>
@@ -341,26 +366,6 @@
 
             
             
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="CSAPP第十章笔记-系统级I-O" data-title="CSAPP:系统级I/O" data-url="http://Humbertzhang.github.io/2017/10/02/CSAPP第十章笔记-系统级I-O/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"ysblog"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
 
 
 

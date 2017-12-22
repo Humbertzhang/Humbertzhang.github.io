@@ -18,8 +18,8 @@
 <meta property="og:site_name" content="Humbert's Blog">
 <meta property="og:description" content="STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。
 在C++标准中，STL被组织为下面的13个头文件： &amp;lt;algorithm&amp;gt;、&amp;lt;deque&amp;gt;、&amp;lt;fu">
-<meta property="og:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
-<meta property="og:image" content="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\">
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)#/media/File:Data_Queue.svg">
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\)#/media/File:Lifo_stack.png">
 <meta property="og:image" content="https://i.stack.imgur.com/kQnCS.png">
 <meta property="og:image" content="http://ohr9krjig.bkt.clouddn.com/remove.png">
 <meta property="og:updated_time" content="2017-12-22T05:24:09.776Z">
@@ -27,7 +27,7 @@
 <meta name="twitter:title" content="CPP STL介绍">
 <meta name="twitter:description" content="STL介绍STL(Standard Template Library), 标准模板库， 是一个具有工业强度的，高效的C++ 程序库。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。
 在C++标准中，STL被组织为下面的13个头文件： &amp;lt;algorithm&amp;gt;、&amp;lt;deque&amp;gt;、&amp;lt;fu">
-<meta name="twitter:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">
+<meta name="twitter:image" content="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)#/media/File:Data_Queue.svg">
   
     <link rel="alternative" href="/atom.xml" title="Humbert&#39;s Blog" type="application/atom+xml">
   
@@ -209,10 +209,22 @@
 </ul>
 <h3><span id="常用容器与算法介绍">常用容器与算法介绍</span></h3><h4><span id="常用容器">常用容器</span></h4><p><code>&lt;vector&gt;</code><br>vector是一个能够存放任意类型的动态数组。当你不知道需要选取什么容器时就选它吧。vector在储存空间不足时会开辟一个原空间*2大小的空间，并将原数据拷贝到新的空间中。这个操作比较耗时，但是有办法可以弥补这个缺点，在下文会有。</p>
 <p><code>&lt;list&gt;</code><br>双向循环链表。不可以随机存储，但是在任何地方插入与删除元素的时间都是常量.</p>
-<p><code>&lt;queue&gt;</code><br>队列, 先进先出的数据结构.<br><img src="https://en.wikipedia.org/wiki/Queue_(abstract_data_type" alt="">#/media/File:Data_Queue.svg)</p>
+<p><code>&lt;queue&gt;</code><br>队列, 先进先出的数据结构.<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)#/media/File:Data_Queue.svg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p><code>&lt;deque&gt;</code><br>Deque是一个双向队列，既支持随机存取(像数组一样)，又支持两端的操作(在前后插入，在前后删除).</p>
 <p><code>&lt;priority_queue&gt;</code><br>优先队列，即堆。每次出队的元素为优先级最高的那一个。</p>
-<p><code>&lt;stack&gt;</code><br>栈， 后进先出的数据结构。<br><img src="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\" alt="">#/media/File:Lifo_stack.png)</p>
+<p><code>&lt;stack&gt;</code><br>栈， 后进先出的数据结构。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://en.wikipedia.org/wiki/Stack_\(abstract_data_type\)#/media/File:Lifo_stack.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p><code>&lt;set&gt;</code><br>set, multiset, map, multimap底层都是使用<a href="https://sakurawood.github.io/2017/06/25/%E7%BA%A2%E9%BB%91%E6%A0%91/" target="_blank" rel="external">红黑树</a>实现的。<br>集合，每个值都是惟一的。</p>
 <p><code>&lt;multiset&gt;</code><br>多集，值可以重复，可以记录每个元素出现了多少次。</p>
 <p><code>&lt;map&gt;</code><br>键值对，键唯一，一个键对应一个值。</p>
@@ -242,7 +254,13 @@
 </li>
 </ul>
 <p>… …</p>
-<p><img src="https://i.stack.imgur.com/kQnCS.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.stack.imgur.com/kQnCS.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h2><span id="使用技巧">使用技巧</span></h2><h3><span id="用empty而非size来检查容器是否为空">用empty()而非size()来检查容器是否为空</span></h3><p>对于所有容器，empty()都使用常数时间，而对于某些容器，size()需要耗费线性时间。</p>
 <h3><span id="当在容器中存放指针时注意在销毁容器前先销毁指针">当在容器中存放指针时，注意在销毁容器前先销毁指针</span></h3><p>因为简单地delete容器并不能delete掉内部的那些指针。</p>
 <h3><span id="删除">删除</span></h3><p><strong>如果你想删除某个值的元素，不同容器需要采用不同的方法。</strong></p>
@@ -250,7 +268,13 @@
 <li>如果采用连续内存容器，最好使用earse-remove方法.</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v.erase(remove(v.begin(), v.end(), <span class="number">1</span>), c.end());</div></pre></td></tr></table></figure>
-<p><img src="http://ohr9krjig.bkt.clouddn.com/remove.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ohr9krjig.bkt.clouddn.com/remove.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ul>
 <li><p>对于list, 最有效的是直接使用list的remove成员函数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c.remove(<span class="number">1</span>);</div></pre></td></tr></table></figure>
@@ -328,26 +352,6 @@
 
             
             
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="CPP容器" data-title="CPP STL介绍" data-url="http://Humbertzhang.github.io/2017/12/11/CPP容器/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"ysblog"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
 
 
 

@@ -202,7 +202,13 @@
 <p>不过这种方式并没有性能上的优势。</p>
 <h2><span id="逻辑运算">逻辑运算</span></h2><p>在逻辑运算中，所有非0的参数表示<code>True</code>, 0表示<code>False</code>.<br>并且，如果对一个参数求值，如<br><code>if(A || B)</code>, 如果只运算A就可以得到确定的结果，那么B就不会被运算。<br>因此我认为在写程序时要注意，最好不要将对程序结果有影响的式子放在逻辑运算中。</p>
 <h2><span id="移位运算">移位运算</span></h2><p>左移：在右端补0<br>逻辑右移：在左端补0<br>算数右移：在左端补最高有效位的值。对有符号整数的运算很实用。<br>对绝大多数编译器，对有符号数进行算数右移，对无符号数进行逻辑右移。</p>
-<h1><span id="整数表示">整数表示</span></h1><h2><span id="无符号数编码">无符号数编码</span></h2><p>可以用向量的思想来理解，每一位都是一个长度为2^i次方的向量，则无符号数字的值即为每一位向量的和。<br><img src="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg" alt=""></p>
+<h1><span id="整数表示">整数表示</span></h1><h2><span id="无符号数编码">无符号数编码</span></h2><p>可以用向量的思想来理解，每一位都是一个长度为2^i次方的向量，则无符号数字的值即为每一位向量的和。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h2><span id="有符号数的补码编码">有符号数的补码编码</span></h2><p>对于一个w位的向量 x = <code>[Xw-1, Xw-2, Xw-3 ... X0]</code>, 第一位为符号位，权重为<code>(-2^w-1)</code>，而这个值足够大到加上之后的所有正数还是负数。因此符号位为1时，值为负，为0时，值为正。</p>
 <p>则最小数为：<code>-2^w-1</code>, 即为只有第一位为1的，其他都为0的情况。<br>最大数为:[01111…]情况，此时为<code>2^w-2 + 2^w-3 + ... + 2^0</code>, 即为<code>2^w-1-1</code><br>因此Min = -(Max+1), 且UnsignedMax = <code>2*MaX + 1</code> </p>
 <h2><span id="有符号数和无符号数的之间的转换">有符号数和无符号数的之间的转换</span></h2>
@@ -234,26 +240,6 @@
 
             
             
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="CSAPP信息的表示与处理" data-title="CSAPP信息的表示与处理" data-url="http://Humbertzhang.github.io/2017/12/20/CSAPP信息的表示与处理/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"ysblog"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
 
 
 
