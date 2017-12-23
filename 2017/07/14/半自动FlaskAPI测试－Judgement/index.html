@@ -22,7 +22,7 @@ git clone https://github.com/Humber">
 
 使用方法现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:
 git clone https://github.com/Humber">
-<meta property="og:image" content="https://cuntuku.com/image/44PCc">
+<meta property="og:image" content="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif">
 <meta property="og:updated_time" content="2017-07-14T05:58:58.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="半自动FlaskAPI测试－Judgement">
@@ -30,7 +30,7 @@ git clone https://github.com/Humber">
 
 使用方法现在还没上传到pip那里（貌似pip在重构？怎么都传不上去），所以暂时只能clone下来judgement的仓库使用:
 git clone https://github.com/Humber">
-<meta name="twitter:image" content="https://cuntuku.com/image/44PCc">
+<meta name="twitter:image" content="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif">
   
     <link rel="alternative" href="/atom.xml" title="Humbert&#39;s Blog" type="application/atom+xml">
   
@@ -214,13 +214,7 @@ git clone https://github.com/Humber">
     ├── signin.py
     ├── signup.py
     └── uploadtime.py
-</code></pre><p>其中<code>test_apis</code>文件夹是用来测试使用的，例如下图：<br>[<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://cuntuku.com/image/44PCc" alt="judge_demo.gif](https://storage2.cuntuku.com/2017/07/14/judge_demo.gif)" title="">
-                </div>
-                <div class="image-caption">judge_demo.gif](https://storage2.cuntuku.com/2017/07/14/judge_demo.gif)</div>
-            </figure><br>在实际使用中输入的API Floder Address为我们的api存放的文件夹．接着judgement便会自动地在其所在的文件夹为我们生成API的测试，存放在自动生成的testByJudgement文件夹里．<br>judgement使用就是这样,肯定还有很多不足和可以改进的地方，欢迎 issue 和 pr.</p>
+</code></pre><p>其中<code>test_apis</code>文件夹是用来测试使用的，例如下图：<br><a href="https://cuntuku.com/image/44PCc" target="_blank" rel="external"><img src="https://storage2.cuntuku.com/2017/07/14/judge_demo.gif" alt="judge_demo.gif"></a><br>在实际使用中输入的API Floder Address为我们的api存放的文件夹．接着judgement便会自动地在其所在的文件夹为我们生成API的测试，存放在自动生成的testByJudgement文件夹里．<br>judgement使用就是这样,肯定还有很多不足和可以改进的地方，欢迎 issue 和 pr.</p>
 <hr>
 <h3><span id="实现方法">实现方法</span></h3><p>主要便是调用了文件读写的api．<br>读取api文件夹中每个文件，然后对每一行进行检查，如果该行中有@api.route()字样便识别为一个api的开始，然后跳过接下来带有＂＠＂，＂＃＂的行和空行，读取其api名字与方法，根据不同的方法来file.writelines不同的内容．</p>
 

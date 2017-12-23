@@ -19,7 +19,7 @@
 <meta property="og:description" content="信息存储字数据大小为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。如int32_t, int64_t, uint32_t, uint64_t等.
 寻址和字节顺序假设一个程序中的对象由w位的数字来表示，且w是8的倍数(一个Byte是8个bit),那么就把它从最高位到最低位每8个划成一个字节。在存储">
 <meta property="og:image" content="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg">
-<meta property="og:updated_time" content="2017-12-22T05:24:19.928Z">
+<meta property="og:updated_time" content="2017-12-23T13:00:49.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP信息的表示与处理">
 <meta name="twitter:description" content="信息存储字数据大小为了避免由于依赖“典型”大小和不同编译器设置带来的奇怪行为，IOSC99引入了一类数据类型，其数据大小在不同机器上是固定的，不随编译器与机器设置而改变。如int32_t, int64_t, uint32_t, uint64_t等.
@@ -187,7 +187,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息存储</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">字数据大小</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">寻址和字节顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">二进制代码迁移性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">位级运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">逻辑运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">移位运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">整数表示</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">无符号数编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">有符号数的补码编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">有符号数和无符号数的之间的转换</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息存储</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">字数据大小</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">寻址和字节顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">二进制代码迁移性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">位级运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">逻辑运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">移位运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.</span> <span class="post-toc-text">整数表示</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">无符号数编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">有符号数的补码编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">有符号数和无符号数的之间的转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">扩展一个数字的位表示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">有关有符号数和无符号数的建议</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">3.</span> <span class="post-toc-text">整数运算</span></a></li></ol>
             </nav>
             
         </aside>
@@ -202,16 +202,20 @@
 <p>不过这种方式并没有性能上的优势。</p>
 <h2><span id="逻辑运算">逻辑运算</span></h2><p>在逻辑运算中，所有非0的参数表示<code>True</code>, 0表示<code>False</code>.<br>并且，如果对一个参数求值，如<br><code>if(A || B)</code>, 如果只运算A就可以得到确定的结果，那么B就不会被运算。<br>因此我认为在写程序时要注意，最好不要将对程序结果有影响的式子放在逻辑运算中。</p>
 <h2><span id="移位运算">移位运算</span></h2><p>左移：在右端补0<br>逻辑右移：在左端补0<br>算数右移：在左端补最高有效位的值。对有符号整数的运算很实用。<br>对绝大多数编译器，对有符号数进行算数右移，对无符号数进行逻辑右移。</p>
-<h1><span id="整数表示">整数表示</span></h1><h2><span id="无符号数编码">无符号数编码</span></h2><p>可以用向量的思想来理解，每一位都是一个长度为2^i次方的向量，则无符号数字的值即为每一位向量的和。<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
+<h1><span id="整数表示">整数表示</span></h1><h2><span id="无符号数编码">无符号数编码</span></h2><p>可以用向量的思想来理解，每一位都是一个长度为2^i次方的向量，则无符号数字的值即为每一位向量的和。<br><img src="http://pic5.zhimg.com/50/v2-6333e9847024efb396a99e021235d369_r.jpg" alt=""></p>
 <h2><span id="有符号数的补码编码">有符号数的补码编码</span></h2><p>对于一个w位的向量 x = <code>[Xw-1, Xw-2, Xw-3 ... X0]</code>, 第一位为符号位，权重为<code>(-2^w-1)</code>，而这个值足够大到加上之后的所有正数还是负数。因此符号位为1时，值为负，为0时，值为正。</p>
 <p>则最小数为：<code>-2^w-1</code>, 即为只有第一位为1的，其他都为0的情况。<br>最大数为:[01111…]情况，此时为<code>2^w-2 + 2^w-3 + ... + 2^0</code>, 即为<code>2^w-1-1</code><br>因此Min = -(Max+1), 且UnsignedMax = <code>2*MaX + 1</code> </p>
-<h2><span id="有符号数和无符号数的之间的转换">有符号数和无符号数的之间的转换</span></h2>
+<h2><span id="有符号数和无符号数的之间的转换">有符号数和无符号数的之间的转换</span></h2><p>对大多数C语言编译器，无符号数强制类型转换为有符号数在 <code>底层的位</code> 上不会有改变，只是对每一位解释方式做了改变。</p>
+<h2><span id="扩展一个数字的位表示">扩展一个数字的位表示</span></h2><p>一个较大的数据类型是不可以转换为一个较小的数据类型，但是一个较小的数据类型是可以转换为一个较大的数据类型的，对于有符号数跟无符号数有不同的策略。</p>
+<p>对于无符号数的扩展，直接在前面补零即可。<br>x = [uw-1, uw-2, ……, u0]  ===0扩展===&gt; [0, 0, 0, …, uw-1, uw-2, uw-3 …… u0]</p>
+<p>对于有符号数(补码)，则在前面补最前那一位数字。<br>x = [w-1, w-2, ……, w0]    ===补码扩展===&gt; [w-1, w-1, w-1, w-1, …… w-1, w-2, w-3, ……, w0]</p>
+<h2><span id="有关有符号数和无符号数的建议">有关有符号数和无符号数的建议</span></h2><p>有符号数与无符号数之间的转换会经常地产生错误，并且无符号数在为0时若用它减去一个大于0的数，也会导致意想不到的结果。</p>
+<p>比如下面这段程序:<br>length为a的长度<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">sum_float</span><span class="params">(<span class="keyword">float</span> a[], <span class="keyword">unsigned</span> length)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">float</span> result = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++)&#123;</div><div class="line">        result += a[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在传入的length为0时，不会返回0,但是却会报错，因为unsigned length在为0时，unsigned 0 - 1会得出一个Umax, 导致每个数都会符合for循环条件，便会导致访问数组中不存在的元素，导致出错。<br>一个可行的解决办法为将传入的了length改为int.</p>
+<p>又或者这段比较字符串长度的代码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> <span class="built_in">strlen</span>(<span class="keyword">const</span> <span class="keyword">char</span> * s);</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">strlonger</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> * t)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">strlen</span>(s) - <span class="built_in">strlen</span>(t) &gt; <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看起来没有错误，但是注意size_t其实就是unsigned int.<br>因此当s为空字符串，且t不为空字符串时，就会发生与上文一致的错误。<br>一个可行的解决办吧是这样写strlonger函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">strlenger</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *t)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">int</span>(<span class="built_in">strlen</span>(s)) - <span class="keyword">int</span>(<span class="built_in">strlen</span>(t));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>就不会出现上述问题了。<br>因为无符号数经常出现各种错误，避免这类错误的最好的办法就是应该尽量避免无符号数的使用。</p>
+<h1><span id="整数运算">整数运算</span></h1>
 
             
             
@@ -225,6 +229,13 @@
             </div>
             
 <nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2017/12/23/CSAPP程序的机器级表示/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CSAPP程序的机器级表示</h4>
+      </a>
+    </div>
   
 
   
